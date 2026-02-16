@@ -2,7 +2,7 @@
 
 import { FadeIn } from "@/components/FadeIn";
 import { PageTransition } from "@/components/PageTransition";
-import { SplineAvatar } from "@/components/SplineAvatar";
+import { GLBAvatar } from "@/components/GLBAvatar";
 import { siteConfig, aboutText, techStack } from "@/data/content";
 
 /** Home page — hero section, about blurb, and tech stack display */
@@ -26,9 +26,9 @@ export default function Home() {
             </p>
           </FadeIn>
 
-          {/* Right — 3D Spline avatar */}
+          {/* Right — 3D GLB avatar */}
           <FadeIn delay={0.2} className="flex-1">
-            <SplineAvatar />
+            <GLBAvatar />
           </FadeIn>
         </div>
       </section>

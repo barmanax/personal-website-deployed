@@ -1,32 +1,55 @@
 "use client";
 
-import { Suspense, lazy } from "react";
+import Spline from "@splinetool/react-spline";
+import type { Application } from "@splinetool/runtime";
 
 /**
  * 3D avatar embed using Spline.
- * Lazy-loaded so the heavy Spline runtime (~1MB) doesn't block initial page render.
- * The Suspense fallback shows a loading spinner while the scene downloads.
+ * Renders the interactive Spline scene with controlled initial state.
  */
-const Spline = lazy(() => import("@splinetool/react-spline"));
-
 const SPLINE_SCENE_URL =
   "https://prod.spline.design/uutsMIcAoKg6DMsz/scene.splinecode";
 
 export function SplineAvatar() {
-  return (
-    <div className="relative h-[350px] w-full sm:h-[450px]">
-      <Suspense fallback={<LoadingFallback />}>
-        <Spline scene={SPLINE_SCENE_URL} />
-      </Suspense>
-    </div>
-  );
-}
+  /**
+   * Callback fired when Spline scene finishes loading.
+   * Sets the animation to start at frame 0 for a centered, front-facing pose.
+   * @param {Application} splineApp - The Spline application instance
+   */
+  function onLoad(splineApp: Application) {
+    // Stop any animations
+    try {
+      splineApp.stop();
+    } catch (e) {
+      console.log("Could not stop animation:", e);
+    }
 
-/** Minimal loading state while the 3D scene downloads */
-function LoadingFallback() {
+    // Zoom out the camera to show full avatar
+    try {
+      const camera = splineApp.findObjectByName("Camera");
+      if (camera) {
+        // Try different zoom/scale approaches
+        if ('zoom' in camera) {
+          (camera as any).zoom = 0.7; // Zoom out (lower = more zoomed out)
+        }
+        if ('fov' in camera) {
+          (camera as any).fov = 60; // Wider field of view
+        }
+
+        // Also pull camera back significantly
+        camera.position.z += 200;
+        camera.rotation.y = 0;
+
+        console.log("Camera adjusted:", camera);
+      }
+    } catch (e) {
+      console.log("Camera adjustment failed:", e);
+    }
+  }
+
   return (
-    <div className="flex h-full w-full items-center justify-center">
-      <div className="h-10 w-10 animate-spin rounded-full border-2 border-surface-700 border-t-accent" />
+    <div className="relative h-[750px] w-full sm:h-[850px]">
+      <Spline scene={SPLINE_SCENE_URL} onLoad={onLoad} />
     </div>
   );
 }
