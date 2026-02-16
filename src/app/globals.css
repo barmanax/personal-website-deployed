@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Smooth theme transitions across all elements */
+  * {
+    @apply transition-colors duration-200;
+  }
+
+  body {
+    @apply bg-white text-surface-900 dark:bg-surface-950 dark:text-surface-100;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Custom scrollbar for dark theme */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-surface-300 dark:bg-surface-700 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-surface-400 dark:bg-surface-600;
+  }
+}
+
+@layer components {
+  /* Reusable glass/blur card effect for navbar and cards */
+  .glass {
+    @apply bg-white/70 dark:bg-surface-950/70 backdrop-blur-xl border border-surface-200 dark:border-surface-800;
+  }
+
+  /* Section container with consistent spacing */
+  .section-container {
+    @apply mx-auto max-w-6xl px-6 py-20 sm:px-8;
+  }
+
+  /* Heading styles */
+  .section-heading {
+    @apply text-3xl font-bold tracking-tight sm:text-4xl;
+  }
+}
