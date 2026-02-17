@@ -16,8 +16,8 @@ export function HeroCarousel() {
   // Define slides: avatar + 2 images
   const slides = [
     { type: "avatar" as const },
-    { type: "image" as const, src: "/profile-1.jpg", alt: "Profile photo 1" },
-    { type: "image" as const, src: "/profile-2.jpg", alt: "Profile photo 2" },
+    { type: "image" as const, src: "/profile-1.png", alt: "Profile photo 1" },
+    { type: "image" as const, src: "/profile-2.JPG", alt: "Profile photo 2" },
   ];
 
   const totalSlides = slides.length;
