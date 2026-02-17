@@ -61,7 +61,7 @@ export function GLBAvatar() {
   return (
     <div className="relative h-[500px] w-full sm:h-[550px] lg:h-[600px]">
       <Canvas
-        camera={{ position: [-1, 2.8, 4.5], fov: 45 }}
+        camera={{ position: [-1, 2, 4.5], fov: 45 }}
         gl={{ alpha: true }}
         className="rounded-xl"
       >
@@ -78,8 +78,8 @@ export function GLBAvatar() {
           {/* Subtle rim light from behind */}
           <pointLight position={[0, 2, -2]} intensity={0.4} color="#60a5fa" />
 
-          {/* Environment map for realistic reflections */}
-          <Environment preset="city" />
+          {/* Environment map for realistic reflections - background disabled for transparency */}
+          <Environment preset="city" background={false} />
 
           <Model onLoad={() => setLoaded(true)} onClick={() => {}} />
         </Suspense>
@@ -89,7 +89,7 @@ export function GLBAvatar() {
           enablePan={false}
           minDistance={2}
           maxDistance={5}
-          target={[0, 0.2, 0]}
+          target={[0, -0.3, 0]}
         />
       </Canvas>
 
