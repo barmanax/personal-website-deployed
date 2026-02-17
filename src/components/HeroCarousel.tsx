@@ -12,6 +12,7 @@ import Image from "next/image";
  */
 export function HeroCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
   // Define slides: avatar + 2 images
   const slides = [
@@ -64,7 +65,11 @@ export function HeroCarousel() {
   return (
     <div className="relative w-full max-w-lg mx-auto">
       {/* Main carousel container */}
-      <div className="relative h-[400px] lg:h-[500px] overflow-hidden rounded-2xl bg-surface-100 dark:bg-surface-900">
+      <div
+        className="relative h-[400px] lg:h-[500px] overflow-hidden rounded-2xl bg-surface-100 dark:bg-surface-900"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
         <AnimatePresence initial={false} custom={1}>
           <motion.div
             key={currentSlide}
@@ -93,28 +98,34 @@ export function HeroCarousel() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Navigation arrows */}
-        <button
+        {/* Navigation arrows - fade in on hover */}
+        <motion.button
           onClick={prevSlide}
           className="absolute left-4 top-1/2 -translate-y-1/2 z-10
                      bg-surface-50/80 dark:bg-surface-800/80 backdrop-blur-sm
                      hover:bg-surface-100 dark:hover:bg-surface-700
                      rounded-full p-2 transition-colors"
           aria-label="Previous slide"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isHovered ? 1 : 0 }}
+          transition={{ duration: 0.2 }}
         >
           <ChevronLeft className="w-6 h-6" />
-        </button>
+        </motion.button>
 
-        <button
+        <motion.button
           onClick={nextSlide}
           className="absolute right-4 top-1/2 -translate-y-1/2 z-10
                      bg-surface-50/80 dark:bg-surface-800/80 backdrop-blur-sm
                      hover:bg-surface-100 dark:hover:bg-surface-700
                      rounded-full p-2 transition-colors"
           aria-label="Next slide"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isHovered ? 1 : 0 }}
+          transition={{ duration: 0.2 }}
         >
           <ChevronRight className="w-6 h-6" />
-        </button>
+        </motion.button>
       </div>
 
       {/* Dot indicators */}
