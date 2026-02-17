@@ -61,12 +61,12 @@ export function GLBAvatar() {
   return (
     <div className="relative h-[500px] w-full sm:h-[550px] lg:h-[600px]">
       <Canvas
-        camera={{ position: [0, 0.5, 4.5], fov: 55 }}
+        camera={{ position: [-1, 2, 4.5], fov: 45 }}
         className="rounded-xl"
       >
         <Suspense fallback={null}>
           {/* Soft ambient lighting */}
-          <ambientLight intensity={0.5} />
+          <ambientLight intensity={0.9} />
 
           {/* Main directional light from front-top */}
           <directionalLight position={[2, 3, 2]} intensity={1} />
