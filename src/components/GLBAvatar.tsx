@@ -47,7 +47,7 @@ function Model({ onLoad, onClick }: { onLoad: () => void; onClick: () => void })
       ref={group}
       object={scene}
       scale={1.5}
-      position={[0, -0.2, 0]}
+      position={[0, -1.2, 0]}
       onClick={handleClick}
       onPointerOver={() => (document.body.style.cursor = "pointer")}
       onPointerOut={() => (document.body.style.cursor = "default")}
