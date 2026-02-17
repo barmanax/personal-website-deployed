@@ -47,7 +47,7 @@ function Model({ onLoad, onClick }: { onLoad: () => void; onClick: () => void })
       ref={group}
       object={scene}
       scale={1.5}
-      position={[0, -0.8, 0]}
+      position={[0, -0.2, 0]}
       onClick={handleClick}
       onPointerOver={() => (document.body.style.cursor = "pointer")}
       onPointerOut={() => (document.body.style.cursor = "default")}
@@ -89,7 +89,7 @@ export function GLBAvatar() {
           enablePan={false}
           minDistance={2}
           maxDistance={5}
-          target={[0, -0.3, 0]}
+          target={[0, 0.2, 0]}
         />
       </Canvas>
 
