@@ -64,9 +64,11 @@ export function HeroCarousel() {
 
   return (
     <div className="relative w-full max-w-lg mx-auto">
-      {/* Main carousel container */}
+      {/* Main carousel container - gray background only for image slides */}
       <div
-        className="relative h-[400px] lg:h-[500px] overflow-hidden rounded-2xl bg-surface-100 dark:bg-surface-900"
+        className={`relative h-[400px] lg:h-[500px] overflow-hidden rounded-2xl ${
+          currentSlideData.type === "image" ? "bg-surface-100 dark:bg-surface-900" : ""
+        }`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
