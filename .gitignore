@@ -23,6 +23,8 @@
 CLAUDE.md
 # Architecture documentation (development reference)
 ARCHITECTURE.md
+# Product requirements document (internal reference)
+PRD.md
 # Claude Code settings
 .claude/
 
