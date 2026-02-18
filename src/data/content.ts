@@ -3,18 +3,30 @@
  * Keeps data separate from presentation so the UI components stay clean.
  */
 
+import { BellIcon } from "lucide-react";
+import  React from 'react'; 
+
 export const siteConfig = {
-  name: "Your Name",
+  name: "Aditya Barman",
   tagline: "CS + Statistics @ UIUC",
   description:
     "Building things at the intersection of software engineering and data. Passionate about creating elegant solutions to complex problems.",
-  email: "your.email@example.com",
-  github: "https://github.com/yourusername",
-  linkedin: "https://linkedin.com/in/yourusername",
+  email: "a02barman@gmail.com",
+  github: "https://github.com/barmanax",
+  linkedin: "https://www.linkedin.com/in/adityabarman/",
 };
 
-export const aboutText =
-  "I'm a Computer Science and Statistics student at the University of Illinois at Urbana-Champaign. I love building full-stack applications, exploring data-driven insights, and working on projects that push me to learn something new. When I'm not coding, you'll find me exploring new technologies, contributing to open source, or diving into a good book.";
+export const aboutText = React.createElement(
+  "span",
+  null,
+  "I'm a Computer Science and Statistics student at the University of Illinois Urbana-Champaign. I love building full-stack applications, exploring data-driven insights, and learning new concepts. When I'm not coding, you'll find me playing sports, listening to music, traveling the world, and rating food spots on ",
+  React.createElement(
+    "a",
+    { href: "https://beliapp.co/app/adityabarman", target: "_blank", rel: "noopener noreferrer", className: "text-accent hover:underline" },
+    "Beli"
+  ),
+  "."
+);
 
 /** Tech stack items — each with a display name and category for filtering */
 export const techStack = [
