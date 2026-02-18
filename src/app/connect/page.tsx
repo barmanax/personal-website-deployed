@@ -94,9 +94,6 @@ export default function ConnectPage() {
               />
               {/* Fallback message if iframe doesn't load */}
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <p className="text-surface-400 dark:text-surface-600 text-sm">
-                  Place your resume.pdf in the /public folder
-                </p>
               </div>
             </div>
           </div>

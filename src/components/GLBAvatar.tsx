@@ -61,7 +61,7 @@ export function GLBAvatar() {
   return (
     <div className="relative h-[500px] w-full sm:h-[550px] lg:h-[600px]">
       <Canvas
-        camera={{ position: [-1, 2, 4.5], fov: 45 }}
+        camera={{ position: [-2, 2, 4.5], fov: 45 }}
         gl={{ alpha: true }}
         className="rounded-xl"
       >
