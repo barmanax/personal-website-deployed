@@ -21,6 +21,10 @@
 # ============================================
 # Claude Code instructions (personal preferences)
 CLAUDE.md
+# Architecture documentation (development reference)
+ARCHITECTURE.md
+# Claude Code settings
+.claude/
 
 # Editor/IDE specific files
 .vscode/
@@ -73,4 +77,3 @@ coverage/
 # ============================================
 # Debug files
 *.map
-CLAUDE.md
