@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- A/B monogram inside a circle — adapts to light/dark via currentColor -->
+  <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width="6"/>
+  <!-- Letter A -->
+  <text x="28" y="64" font-family="Arial, Helvetica, sans-serif" font-weight="bold" font-size="36" fill="currentColor" text-anchor="middle">A</text>
+  <!-- Forward slash in accent cyan -->
+  <text x="50" y="64" font-family="Arial, Helvetica, sans-serif" font-weight="bold" font-size="36" fill="#29ABE2" text-anchor="middle">/</text>
+  <!-- Letter B -->
+  <text x="72" y="64" font-family="Arial, Helvetica, sans-serif" font-weight="bold" font-size="36" fill="currentColor" text-anchor="middle">B</text>
+</svg>

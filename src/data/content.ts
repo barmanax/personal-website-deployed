@@ -28,24 +28,53 @@ export const aboutText = React.createElement(
   "."
 );
 
-/** Tech stack items — each with a display name and category for filtering */
-export const techStack = [
-  { name: "TypeScript", category: "language" },
-  { name: "Python", category: "language" },
-  { name: "Java", category: "language" },
-  { name: "C++", category: "language" },
-  { name: "React", category: "frontend" },
-  { name: "Next.js", category: "frontend" },
-  { name: "Tailwind CSS", category: "frontend" },
-  { name: "Node.js", category: "backend" },
-  { name: "Express", category: "backend" },
-  { name: "PostgreSQL", category: "backend" },
-  { name: "MongoDB", category: "backend" },
-  { name: "Git", category: "tools" },
-  { name: "Docker", category: "tools" },
-  { name: "AWS", category: "tools" },
-  { name: "Figma", category: "tools" },
-  { name: "Linux", category: "tools" },
+/** The three role-based filter tabs shown in the tech stack section */
+export type TechCategory = "fullstack" | "backend" | "data";
+
+export interface TechItem {
+  name: string;
+  /** One or more tabs this skill belongs to — skills can appear in multiple tabs */
+  categories: TechCategory[];
+  /** Optional external URL — renders the pill as a clickable link */
+  link?: string;
+}
+
+/** Tech stack items — each tagged with one or more role categories for tab filtering */
+export const techStack: TechItem[] = [
+  // Full-stack
+  { name: "JavaScript",              categories: ["fullstack"] },
+  { name: "HTML/CSS",                categories: ["fullstack"] },
+  { name: "React",                   categories: ["fullstack"] },
+  { name: "Next.js",                 categories: ["fullstack"] },
+  // Full-stack + backend
+  { name: "Node.js",                 categories: ["fullstack", "backend"] },
+  { name: "Express",                 categories: ["fullstack", "backend"] },
+  { name: "Django",                  categories: ["fullstack", "backend"] },
+  { name: "MongoDB",                 categories: ["fullstack", "backend"] },
+  { name: "Docker",                  categories: ["fullstack", "backend"] },
+  { name: "Git",                     categories: ["fullstack", "backend", "data"] },
+  // Backend
+  { name: "Python",                  categories: ["backend", "data"] },
+  { name: "Java",                    categories: ["backend"] },
+  { name: "Kotlin",                  categories: ["backend"] },
+  { name: "C++",                     categories: ["backend"] },
+  { name: "SQL (MySQL)",             categories: ["backend", "data"] },
+  { name: "Flask",                   categories: ["backend", "data"] },
+  { name: "FastAPI",                 categories: ["backend"] },
+  { name: "AWS",                     categories: ["backend", "data"], link: "https://www.credly.com/badges/a24ca5ef-cf6d-4411-b7c1-3a9e9421d2a5/public_url" },
+  { name: "GCP",                     categories: ["backend", "data"] },
+  // Data engineering / data science
+  { name: "R",                       categories: ["data"] },
+  { name: "MATLAB",                  categories: ["data"] },
+  { name: "TensorFlow",              categories: ["data"] },
+  { name: "LangChain",               categories: ["data"] },
+  { name: "Scikit-learn",            categories: ["data"] },
+  { name: "Pandas",                  categories: ["data"] },
+  { name: "NumPy",                   categories: ["data"] },
+  { name: "Matplotlib",              categories: ["data"] },
+  { name: "Seaborn",                 categories: ["data"] },
+  { name: "OpenCV",                  categories: ["data"] },
+  { name: "HuggingFace Transformers", categories: ["data"] },
 ];
 
 export interface ExperienceEntry {
