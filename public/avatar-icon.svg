@@ -1,10 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- A/B monogram inside a circle — adapts to light/dark via currentColor -->
-  <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width="6"/>
-  <!-- Letter A -->
-  <text x="28" y="64" font-family="Arial, Helvetica, sans-serif" font-weight="bold" font-size="36" fill="currentColor" text-anchor="middle">A</text>
-  <!-- Forward slash in accent cyan -->
-  <text x="50" y="64" font-family="Arial, Helvetica, sans-serif" font-weight="bold" font-size="36" fill="#29ABE2" text-anchor="middle">/</text>
-  <!-- Letter B -->
-  <text x="72" y="64" font-family="Arial, Helvetica, sans-serif" font-weight="bold" font-size="36" fill="currentColor" text-anchor="middle">B</text>
+  <!-- Outer circle -->
+  <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="5"/>
+  <!-- Laptop screen -->
+  <rect x="27" y="28" width="46" height="30" rx="2" fill="currentColor"/>
+  <!-- Screen inner (knocked out area for text) -->
+  <rect x="30" y="31" width="40" height="24" rx="1" fill="none"/>
+  <!-- A on screen -->
+  <text x="39" y="50" font-family="Arial, Helvetica, sans-serif" font-weight="bold" font-size="18" fill="#FFFFFF" text-anchor="middle">A</text>
+  <!-- / on screen in cyan -->
+  <text x="50" y="50" font-family="Arial, Helvetica, sans-serif" font-weight="bold" font-size="18" fill="#29ABE2" text-anchor="middle">/</text>
+  <!-- B on screen -->
+  <text x="61" y="50" font-family="Arial, Helvetica, sans-serif" font-weight="bold" font-size="18" fill="#FFFFFF" text-anchor="middle">B</text>
+  <!-- Laptop base / keyboard -->
+  <path d="M22 59 L27 58 L73 58 L78 59 L78 62 C78 63.5 76.5 65 75 65 L25 65 C23.5 65 22 63.5 22 62 Z" fill="currentColor"/>
+  <!-- Small circle below laptop -->
+  <circle cx="50" cy="72" r="3" fill="currentColor"/>
 </svg>
