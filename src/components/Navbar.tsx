@@ -28,9 +28,24 @@ export function Navbar() {
         {/* Logo / Name */}
         <Link
           href="/"
-          className="text-lg font-semibold tracking-tight hover:text-accent transition-colors"
+          className="flex items-center gap-2.5 hover:text-accent transition-colors"
         >
-          {siteConfig.name}
+          {/* A/B monogram — inline SVG so currentColor adapts to light/dark */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 100 100"
+            width={24}
+            height={24}
+            aria-hidden="true"
+          >
+            <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" strokeWidth="6"/>
+            <text x="28" y="64" fontFamily="Arial, Helvetica, sans-serif" fontWeight="bold" fontSize="36" fill="currentColor" textAnchor="middle">A</text>
+            <text x="50" y="64" fontFamily="Arial, Helvetica, sans-serif" fontWeight="bold" fontSize="36" fill="#29ABE2" textAnchor="middle">/</text>
+            <text x="72" y="64" fontFamily="Arial, Helvetica, sans-serif" fontWeight="bold" fontSize="36" fill="currentColor" textAnchor="middle">B</text>
+          </svg>
+          <span className="text-lg font-semibold tracking-tight">
+            {siteConfig.name}
+          </span>
         </Link>
 
         {/* Desktop links */}

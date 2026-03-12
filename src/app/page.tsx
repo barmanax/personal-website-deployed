@@ -3,7 +3,8 @@
 import { FadeIn } from "@/components/FadeIn";
 import { PageTransition } from "@/components/PageTransition";
 import { HeroCarousel } from "@/components/HeroCarousel";
-import { siteConfig, aboutText, techStack } from "@/data/content";
+import { siteConfig, aboutText } from "@/data/content";
+import { TechStack } from "@/components/TechStack";
 
 /** Home page — hero section, about blurb, and tech stack display */
 export default function Home() {
@@ -48,20 +49,7 @@ export default function Home() {
         <FadeIn>
           <h2 className="section-heading mb-8">Tech Stack</h2>
         </FadeIn>
-        <div className="flex flex-wrap gap-3">
-          {techStack.map((tech, i) => (
-            <FadeIn key={tech.name} delay={i * 0.03}>
-              <span
-                className="rounded-full border border-surface-200 dark:border-surface-700
-                           bg-surface-50 dark:bg-surface-900 px-4 py-2 text-sm font-medium
-                           text-surface-700 dark:text-surface-300 hover:border-accent/50
-                           hover:text-accent transition-colors cursor-default"
-              >
-                {tech.name}
-              </span>
-            </FadeIn>
-          ))}
-        </div>
+        <TechStack />
       </section>
     </PageTransition>
   );
