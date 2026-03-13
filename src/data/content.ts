@@ -88,26 +88,6 @@ export interface ExperienceEntry {
 
 export const experience: ExperienceEntry[] = [
   {
-    type: "education",
-    title: "B.S. Computer Science + Statistics",
-    organization: "University of Illinois at Urbana-Champaign",
-    startDate: "Aug 2022",
-    endDate: "May 2026",
-    bullets: [
-      "Relevant coursework: Data Structures, Algorithms, Systems Programming, Machine Learning, Statistical Modeling",
-    ],
-  },
-  {
-    type: "education",
-    title: "Electrical Engineering & Computer Science (EECS) Track",
-    organization: "Edison Academy Magnet School",
-    startDate: "Sep 2020",
-    endDate: "Jun 2024",
-    bullets: [
-      "Specialized magnet program focused on electrical engineering and computer science fundamentals",
-    ],
-  },
-  {
     type: "work",
     title: "Software Engineering Intern & Co-Op",
     organization: "Motorola Solutions",
@@ -149,6 +129,26 @@ export const experience: ExperienceEntry[] = [
     bullets: [
       "Benchmarked 4 LLMs (ChatGPT, Copilot, Claude, Gemini) on algorithm grading tasks, computing Intraclass Correlation Coefficients to quantify evaluation consistency.",
       "Co-authored paper accepted to the MIT Undergraduate Research Technology Conference (URTC) 2024.",
+    ],
+  },
+  {
+    type: "education",
+    title: "B.S. Computer Science + Statistics",
+    organization: "University of Illinois at Urbana-Champaign",
+    startDate: "Aug 2024",
+    endDate: "May 2027",
+    bullets: [
+      "Relevant coursework: Data Structures, Algorithms, Database Systems, Statistical Modeling, Software Engineering",
+    ],
+  },
+  {
+    type: "education",
+    title: "Electrical Engineering & Computer Science (EECS) Track",
+    organization: "Edison Academy Magnet School",
+    startDate: "Sep 2020",
+    endDate: "Jun 2024",
+    bullets: [
+      "Specialized magnet program focused on electrical engineering and computer science fundamentals",
     ],
   },
 ];
