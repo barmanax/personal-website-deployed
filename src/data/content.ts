@@ -182,16 +182,16 @@ export const projects: Project[] = [
   {
     title: "Popcorn Vision",
     description:
-      "Academic assistant that transforms course syllabi into calendar events and personalized study blocks to automate your entire semester’s schedule in seconds. ",
-    techTags: ["TypeScript", "Next.js", "React", "Tailwind CSS", "Gemini API", "Coolify"],
+      "Image warping and segmentation tool for analyzing popcorn kernel characteristics and predicting flake expansion.",
+    techTags: ["Python", "OpenCV", "Matplotlib", "NumPy", "Pandas"],
     image: "/projects/popcorn.png",
     github: "https://github.com/barmanax/popcorn-vision",
   },
     {
     title: "Hypo",
     description:
-      "Interactive data visualization dashboard built with Python and React for exploring complex datasets.",
-    techTags: ["Python", "React", "D3.js", "Flask"],
+      "Personal experiment tracker for testing behavioral and lifestyle hypotheses.",
+    techTags: ["Next.js", "Typescript", "Tailwind CSS", "PostgreSQL", "Prisma", "Google OAuth"],
     image: "/projects/hypo.png",
     github: "https://github.com/barmanax/hypo",
   },
