@@ -174,16 +174,16 @@ export const projects: Project[] = [
   {
     title: "Samur.ai",
     description:
-      "End-to-end machine learning pipeline for training, evaluating, and deploying models at scale.",
-    techTags: ["Python", "TensorFlow", "Docker", "AWS"],
+      "Platform that extracts assignment and exam deadlines from course syllabi and turns them into study schedules.",
+    techTags: ["TypeScript", "Next.js", "React", "Tailwind CSS", "Gemini API", "Coolify"],
     image: "/projects/samurai.png",
     github: "https://github.com/barmanax/samur.ai",
   },
   {
     title: "Popcorn Vision",
     description:
-      "A collection of developer productivity tools packaged as a fast, ergonomic command-line interface.",
-    techTags: ["TypeScript", "Node.js", "CLI"],
+      "Academic assistant that transforms course syllabi into calendar events and personalized study blocks to automate your entire semester’s schedule in seconds. ",
+    techTags: ["TypeScript", "Next.js", "React", "Tailwind CSS", "Gemini API", "Coolify"],
     image: "/projects/popcorn.png",
     github: "https://github.com/barmanax/popcorn-vision",
   },

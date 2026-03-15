@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { FadeIn } from "@/components/FadeIn";
 import { PageTransition } from "@/components/PageTransition";
-import { projects, Project } from "@/data/content";
+import { projects, siteConfig, Project } from "@/data/content";
 import { Github, ExternalLink } from "lucide-react";
 
 /** Projects page — responsive card grid showcasing portfolio work */
@@ -24,6 +24,21 @@ export default function ProjectsPage() {
             <ProjectCard key={project.title} project={project} index={i} />
           ))}
         </div>
+
+        {/* GitHub CTA */}
+        <FadeIn delay={projects.length * 0.1}>
+          <p className="mt-12 text-center text-surface-500 dark:text-surface-400">
+            …and much more on my{" "}
+            <a
+              href={siteConfig.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-accent hover:underline font-medium"
+            >
+              GitHub
+            </a>
+          </p>
+        </FadeIn>
       </section>
     </PageTransition>
   );
