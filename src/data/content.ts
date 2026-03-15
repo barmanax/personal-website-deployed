@@ -164,35 +164,35 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: "Project Alpha",
+    title: "Echobrief",
     description:
-      "A full-stack web application that solves a real-world problem with an intuitive interface and robust backend.",
-    techTags: ["React", "Node.js", "PostgreSQL", "Docker"],
-    image: "/projects/placeholder.svg",
-    github: "https://github.com/yourusername/project-alpha",
+      "AI-powered post-incident analysis tool for public safety professionals. Placed at MSI Open Innovation Hackathon.",
+    techTags: ["React", "Javascript", "Axios", "FastAPI", "Python", "OpenAI Whisper"],
+    image: "/projects/echobrief.png",
+    github: "https://github.com/barmanax/echobrief",
   },
   {
-    title: "Data Insights Dashboard",
-    description:
-      "Interactive data visualization dashboard built with Python and React for exploring complex datasets.",
-    techTags: ["Python", "React", "D3.js", "Flask"],
-    image: "/projects/placeholder.svg",
-    github: "https://github.com/yourusername/data-dashboard",
-  },
-  {
-    title: "ML Pipeline",
+    title: "Samur.ai",
     description:
       "End-to-end machine learning pipeline for training, evaluating, and deploying models at scale.",
     techTags: ["Python", "TensorFlow", "Docker", "AWS"],
-    image: "/projects/placeholder.svg",
-    github: "https://github.com/yourusername/ml-pipeline",
+    image: "/projects/samurai.png",
+    github: "https://github.com/barmanax/samur.ai",
   },
   {
-    title: "CLI Toolkit",
+    title: "Popcorn Vision",
     description:
       "A collection of developer productivity tools packaged as a fast, ergonomic command-line interface.",
     techTags: ["TypeScript", "Node.js", "CLI"],
     image: "/projects/placeholder.svg",
-    github: "https://github.com/yourusername/cli-toolkit",
+    github: "https://github.com/barmanax/popcorn-vision",
+  },
+    {
+    title: "Hypo",
+    description:
+      "Interactive data visualization dashboard built with Python and React for exploring complex datasets.",
+    techTags: ["Python", "React", "D3.js", "Flask"],
+    image: "/projects/placeholder.svg",
+    github: "https://github.com/barmanax/hypo",
   },
 ];
