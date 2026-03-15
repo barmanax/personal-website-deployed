@@ -184,7 +184,7 @@ export const projects: Project[] = [
     description:
       "A collection of developer productivity tools packaged as a fast, ergonomic command-line interface.",
     techTags: ["TypeScript", "Node.js", "CLI"],
-    image: "/projects/placeholder.svg",
+    image: "/projects/popcorn.png",
     github: "https://github.com/barmanax/popcorn-vision",
   },
     {
@@ -192,7 +192,7 @@ export const projects: Project[] = [
     description:
       "Interactive data visualization dashboard built with Python and React for exploring complex datasets.",
     techTags: ["Python", "React", "D3.js", "Flask"],
-    image: "/projects/placeholder.svg",
+    image: "/projects/hypo.png",
     github: "https://github.com/barmanax/hypo",
   },
 ];
