@@ -195,4 +195,20 @@ export const projects: Project[] = [
     image: "/projects/hypo.png",
     github: "https://github.com/barmanax/hypo",
   },
+  {
+    title: "Autoply",
+    description:
+      "Personalized job application automation tool that finds relevant opportunities and drafts submissions.",
+    techTags: ["Next.js", "Typescript", "Tailwind CSS", "Supabase", "Keywords AI"],
+    image: "/projects/autoply.png",
+    github: "https://github.com/barmanax/autoply",
+  },
+  {
+    title: "ClassCompass",
+    description:
+      "Course recommendation and bookmarking platform designed for UIUC students.",
+    techTags: ["Django", "Django REST Framework", "Next.js", "React", "TypeScript", "TailwindCSS", "SQLite", "PostgreSQL", "Supabase"],
+    image: "/projects/coursecompass.png",
+    github: "https://github.com/CS222-UIUC/ClassCompass",
+  },
 ];
