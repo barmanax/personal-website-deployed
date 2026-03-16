@@ -166,7 +166,7 @@ export const projects: Project[] = [
   {
     title: "Echobrief",
     description:
-      "AI-powered post-incident analysis tool for public safety professionals. Placed at MSI Open Innovation Hackathon.",
+      "Real-time speech-to-insight pipeline that transcribes and analyzes post-incident audio for public safety teams. Placed at MSI Open Innovation Hackathon.",
     techTags: ["React", "Javascript", "Axios", "FastAPI", "Python", "OpenAI Whisper"],
     image: "/projects/echobrief.png",
     github: "https://github.com/barmanax/echobrief",
@@ -174,7 +174,7 @@ export const projects: Project[] = [
   {
     title: "Samur.ai",
     description:
-      "Platform that extracts assignment and exam deadlines from course syllabi and turns them into study schedules.",
+      "NLP-driven scheduling engine that parses course syllabi, extracts deadlines via the Gemini API, and auto-generates optimized study plans.",
     techTags: ["TypeScript", "Next.js", "React", "Tailwind CSS", "Gemini API", "Coolify"],
     image: "/projects/samurai.png",
     github: "https://github.com/barmanax/samur.ai",
@@ -182,7 +182,7 @@ export const projects: Project[] = [
   {
     title: "Popcorn Vision",
     description:
-      "Image warping and segmentation tool for analyzing popcorn kernel characteristics and predicting flake expansion.",
+      "Computer vision pipeline for perspective warping, contour segmentation, and morphological analysis of popcorn kernels to predict flake expansion.",
     techTags: ["Python", "OpenCV", "Matplotlib", "NumPy", "Pandas"],
     image: "/projects/popcorn.png",
     github: "https://github.com/barmanax/popcorn-vision",
@@ -190,7 +190,7 @@ export const projects: Project[] = [
     {
     title: "Hypo",
     description:
-      "Personal experiment tracker for testing behavioral and lifestyle hypotheses.",
+      "Full-stack experiment tracker with OAuth-secured dashboards for logging, analyzing, and validating behavioral and lifestyle hypotheses.",
     techTags: ["Next.js", "Typescript", "Tailwind CSS", "PostgreSQL", "Prisma", "Google OAuth"],
     image: "/projects/hypo.png",
     github: "https://github.com/barmanax/hypo",
@@ -198,7 +198,7 @@ export const projects: Project[] = [
   {
     title: "Autoply",
     description:
-      "Personalized job application automation tool that finds relevant opportunities and drafts submissions.",
+      "LLM-powered job application agent that scrapes listings, matches them to user profiles, and auto-drafts tailored submissions.",
     techTags: ["Next.js", "Typescript", "Tailwind CSS", "Supabase", "Keywords AI"],
     image: "/projects/autoply.png",
     github: "https://github.com/barmanax/autoply",
@@ -206,7 +206,7 @@ export const projects: Project[] = [
   {
     title: "ClassCompass",
     description:
-      "Course recommendation and bookmarking platform designed for UIUC students.",
+      "Full-stack course discovery platform with REST API-backed search, filtering, and bookmarking — built for UIUC's catalog.",
     techTags: ["Django", "Django REST Framework", "Next.js", "React", "TypeScript", "TailwindCSS", "SQLite", "PostgreSQL", "Supabase"],
     image: "/projects/coursecompass.png",
     github: "https://github.com/CS222-UIUC/ClassCompass",
