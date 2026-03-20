@@ -5,7 +5,7 @@ import { PageTransition } from "@/components/PageTransition";
 import { experience, ExperienceEntry } from "@/data/content";
 import { Briefcase, GraduationCap } from "lucide-react";
 
-/** Experience page — vertical timeline showing work and education history */
+/** Experience page -vertical timeline showing work and education history */
 export default function ExperiencePage() {
   return (
     <PageTransition>
@@ -13,7 +13,7 @@ export default function ExperiencePage() {
         <FadeIn>
           <h1 className="section-heading mb-4">Experience</h1>
           <p className="mb-12 text-surface-500 dark:text-surface-400">
-            My journey so far — work experience and education.
+            My journey so far - work experience and education.
           </p>
         </FadeIn>
 
@@ -34,7 +34,7 @@ export default function ExperiencePage() {
 }
 
 /**
- * Single timeline entry — renders an icon, title, organization, dates, and bullets.
+ * Single timeline entry -renders an icon, title, organization, dates, and bullets.
  * Work entries get a briefcase icon; education entries get a graduation cap.
  */
 function TimelineEntry({
@@ -65,7 +65,7 @@ function TimelineEntry({
         <div className="mb-2 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
           <h3 className="text-lg font-semibold">{entry.title}</h3>
           <span className="text-sm text-surface-500 dark:text-surface-500">
-            {entry.startDate} — {entry.endDate}
+            {entry.startDate} - {entry.endDate}
           </span>
         </div>
         <p className="mb-3 text-sm font-medium text-accent">

@@ -26,7 +26,7 @@ const socialLinks = [
   },
 ];
 
-/** Connect page — social links and resume viewer */
+/** Connect page -social links and resume viewer */
 export default function ConnectPage() {
   return (
     <PageTransition>
@@ -34,7 +34,7 @@ export default function ConnectPage() {
         <FadeIn>
           <h1 className="section-heading mb-4">Let&apos;s Connect</h1>
           <p className="mb-12 text-surface-500 dark:text-surface-400">
-            Feel free to reach out — I&apos;m always open to interesting conversations
+            Feel free to reach out. I&apos;m always open to interesting conversations
             and opportunities.
           </p>
         </FadeIn>
@@ -85,7 +85,7 @@ export default function ConnectPage() {
               </a>
             </div>
 
-            {/* PDF embed — falls back gracefully if no PDF is present */}
+            {/* PDF embed -falls back gracefully if no PDF is present */}
             <div className="relative h-[600px] w-full bg-surface-100 dark:bg-surface-900">
               <iframe
                 src="/resume.pdf"
