@@ -4,7 +4,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { techStack, TechCategory } from "@/data/content";
 
-/** Tab definitions — id maps to TechCategory (or "all" for no filter) */
+/** Tab definitions -id maps to TechCategory (or "all" for no filter) */
 const TABS: { id: "all" | TechCategory; label: string }[] = [
   { id: "all",       label: "All" },
   { id: "fullstack", label: "Full-Stack" },
@@ -48,7 +48,7 @@ export function TechStack() {
         ))}
       </div>
 
-      {/* Skill pills — AnimatePresence tracks which keys enter/exit the DOM */}
+      {/* Skill pills -AnimatePresence tracks which keys enter/exit the DOM */}
       <div className="flex flex-wrap gap-3">
         <AnimatePresence mode="popLayout">
           {visible.map((tech) => {

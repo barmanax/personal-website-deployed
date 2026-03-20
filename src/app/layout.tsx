@@ -7,7 +7,7 @@ import { Footer } from "@/components/Footer";
 import { Analytics } from "@vercel/analytics/next";
 
 /**
- * Inter — clean, modern sans-serif from Google Fonts.
+ * Inter -clean, modern sans-serif from Google Fonts.
  * Loaded via next/font which self-hosts the font for zero layout shift.
  */
 const inter = Inter({
@@ -18,7 +18,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Aditya Barman — Portfolio",
+    default: "Aditya Barman - Portfolio",
     template: "%s | Aditya Barman",
   },
   description:
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 };
 
 /**
- * Root layout — wraps every page with the theme provider, navbar, and footer.
+ * Root layout -wraps every page with the theme provider, navbar, and footer.
  * The `suppressHydrationWarning` on <html> is required by next-themes to
  * avoid a React hydration mismatch when the class attribute is injected.
  */

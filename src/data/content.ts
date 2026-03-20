@@ -1,5 +1,5 @@
 /**
- * Central content file — edit this to update all site content.
+ * Central content file - edit this to update all site content.
  * Keeps data separate from presentation so the UI components stay clean.
  */
 
@@ -33,13 +33,13 @@ export type TechCategory = "fullstack" | "backend" | "data";
 
 export interface TechItem {
   name: string;
-  /** One or more tabs this skill belongs to — skills can appear in multiple tabs */
+  /** One or more tabs this skill belongs to - skills can appear in multiple tabs */
   categories: TechCategory[];
-  /** Optional external URL — renders the pill as a clickable link */
+  /** Optional external URL - renders the pill as a clickable link */
   link?: string;
 }
 
-/** Tech stack items — each tagged with one or more role categories for tab filtering */
+/** Tech stack items - each tagged with one or more role categories for tab filtering */
 export const techStack: TechItem[] = [
   // Full-stack
   { name: "JavaScript",              categories: ["fullstack"] },
@@ -116,7 +116,7 @@ export const experience: ExperienceEntry[] = [
     startDate: "Jun 2024",
     endDate: "Aug 2024",
     bullets: [
-      "Built a Python + OpenAI application automating key-term extraction from government documents — with PDF ingestion, sentiment scoring, and visualization — reducing manual effort by 90%.",
+      "Built a Python + OpenAI application automating key-term extraction from government documents with PDF ingestion, sentiment scoring, and visualization, reducing manual effort by 90%.",
       "Presented at the AI4Defense Showcase and achieved a podium finish.",
     ],
   },

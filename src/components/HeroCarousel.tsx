@@ -7,7 +7,7 @@ import { GLBAvatar } from "./GLBAvatar";
 import Image from "next/image";
 
 /**
- * Hero carousel component — rotates between 3D avatar and profile images
+ * Hero carousel component -rotates between 3D avatar and profile images
  * Supports keyboard navigation, click navigation, and swipe gestures
  */
 export function HeroCarousel() {

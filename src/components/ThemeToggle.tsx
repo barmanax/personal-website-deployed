@@ -6,7 +6,7 @@ import { Sun, Moon } from "lucide-react";
 
 /**
  * Animated theme toggle button.
- * Uses useEffect to avoid hydration mismatch — the icon only renders
+ * Uses useEffect to avoid hydration mismatch -the icon only renders
  * after mount when we know the actual resolved theme.
  */
 export function ThemeToggle() {

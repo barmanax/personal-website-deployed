@@ -6,7 +6,7 @@ import { PageTransition } from "@/components/PageTransition";
 import { projects, siteConfig, Project } from "@/data/content";
 import { Github, ExternalLink } from "lucide-react";
 
-/** Projects page — responsive card grid showcasing portfolio work */
+/** Projects page -responsive card grid showcasing portfolio work */
 export default function ProjectsPage() {
   return (
     <PageTransition>
@@ -18,7 +18,7 @@ export default function ProjectsPage() {
           </p>
         </FadeIn>
 
-        {/* Responsive card grid — 1 col on mobile, 2 on larger screens */}
+        {/* Responsive card grid -1 col on mobile, 2 on larger screens */}
         <div className="grid gap-6 sm:grid-cols-2">
           {projects.map((project, i) => (
             <ProjectCard key={project.title} project={project} index={i} />

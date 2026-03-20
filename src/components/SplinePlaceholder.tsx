@@ -39,7 +39,7 @@ export function SplinePlaceholder() {
 
       {/* Label */}
       <p className="absolute bottom-4 text-xs text-surface-500 dark:text-surface-600">
-        3D Avatar — Coming Soon
+        3D Avatar - Coming Soon
       </p>
     </div>
   );

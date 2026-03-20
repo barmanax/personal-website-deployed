@@ -6,14 +6,14 @@ import { HeroCarousel } from "@/components/HeroCarousel";
 import { siteConfig, aboutText } from "@/data/content";
 import { TechStack } from "@/components/TechStack";
 
-/** Home page — hero section, about blurb, and tech stack display */
+/** Home page -hero section, about blurb, and tech stack display */
 export default function Home() {
   return (
     <PageTransition>
       {/* ── Hero Section ── */}
       <section className="section-container">
         <div className="flex flex-col items-center gap-12 lg:flex-row lg:gap-16">
-          {/* Left — Intro text */}
+          {/* Left -Intro text */}
           <FadeIn className="flex-1 space-y-6 text-center lg:text-left">
             <p className="text-sm font-medium uppercase tracking-widest text-accent">
               {siteConfig.tagline}
@@ -27,7 +27,7 @@ export default function Home() {
             </p>
           </FadeIn>
 
-          {/* Right — Hero carousel with avatar and photos */}
+          {/* Right -Hero carousel with avatar and photos */}
           <FadeIn delay={0.2} className="flex-1">
             <HeroCarousel />
           </FadeIn>
