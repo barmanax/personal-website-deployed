@@ -206,7 +206,7 @@ export const projects: Project[] = [
   {
     title: "ClassCompass",
     description:
-      "Full-stack course discovery platform with REST API-backed search, filtering, and bookmarking — built for UIUC's catalog.",
+      "Full-stack course discovery platform for UIUC students with REST API-backed search, filtering, and bookmarking of 4,966 courses.",
     techTags: ["Django", "Django REST Framework", "Next.js", "React", "TypeScript", "TailwindCSS", "SQLite", "PostgreSQL", "Supabase"],
     image: "/projects/coursecompass.png",
     github: "https://github.com/CS222-UIUC/ClassCompass",
