@@ -53,8 +53,9 @@ function Model({ onLoad, onClick }: { onLoad: () => void; onClick: () => void })
     <primitive
       ref={group}
       object={scene}
-      scale={1.7}
-      position={[0, -1.2, 0]}
+      scale={1.9}
+      position={[0, -1.5, 0.0]}
+      rotation={[0, 0.1, 0]}
       onClick={handleClick}
       onPointerOver={() => (document.body.style.cursor = "pointer")}
       onPointerOut={() => (document.body.style.cursor = "default")}
@@ -68,7 +69,7 @@ export function GLBAvatar() {
   return (
     <div className="relative h-full w-full">
       <Canvas
-        camera={{ position: [0, 1.5, 5.5], fov: 50 }}
+        camera={{ position: [0, 1, 5.5], fov: 50 }}
         gl={{ alpha: true }}
         className="rounded-xl"
       >
