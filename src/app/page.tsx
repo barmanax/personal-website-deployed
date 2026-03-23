@@ -28,7 +28,7 @@ export default function Home() {
           </FadeIn>
 
           {/* Right -Hero carousel with avatar and photos */}
-          <FadeIn delay={0.2} className="flex-1">
+          <FadeIn delay={0.2} className="w-full flex-1">
             <HeroCarousel />
           </FadeIn>
         </div>
