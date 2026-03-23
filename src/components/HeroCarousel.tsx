@@ -1,71 +1,61 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { GLBAvatar } from "./GLBAvatar";
 import Image from "next/image";
 
+type Slide =
+  | { type: "avatar"; src?: undefined; alt?: undefined }
+  | { type: "image"; src: string; alt: string };
+
+/** All possible slide definitions */
+const ALL_SLIDES: Slide[] = [
+  { type: "avatar" },
+  { type: "image", src: "/profile-1.png", alt: "Profile photo 1" },
+  { type: "image", src: "/profile-2.JPG", alt: "Profile photo 2" },
+];
+
+/** Image-only slides for mobile (no 3D avatar) */
+const MOBILE_SLIDES: Slide[] = ALL_SLIDES.filter((s) => s.type !== "avatar");
+
 /**
  * Hero carousel component - rotates between 3D avatar and profile images.
- * On mobile (< 768px) the 3D avatar is omitted to avoid WebGL rendering issues
- * and arm-clipping on narrow screens; only the two static photos are shown.
+ * On mobile (< 768px) the 3D avatar is excluded to avoid rendering issues.
  */
 export function HeroCarousel() {
+  // Start with image-only slides (safe for SSR), upgrade to full set after mount
+  const [slides, setSlides] = useState(MOBILE_SLIDES);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-  // null = not yet determined (SSR); false/true set after mount
-  const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
-  // Detect mobile after mount (window is unavailable during SSR)
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
+    const update = () => {
+      const mobile = window.innerWidth < 768;
+      const newSlides = mobile ? MOBILE_SLIDES : ALL_SLIDES;
+      // Batch both updates so React renders them together — no intermediate state
+      setSlides(newSlides);
+      setCurrentSlide(0);
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
   }, []);
 
-  // Reset to slide 0 whenever the slide set changes (mobile ↔ desktop)
-  useEffect(() => {
-    if (isMobile !== null) setCurrentSlide(0);
-  }, [isMobile]);
-
-  const imageSlides = [
-    { type: "image" as const, src: "/profile-1.png", alt: "Profile photo 1" },
-    { type: "image" as const, src: "/profile-2.JPG", alt: "Profile photo 2" },
-  ];
-
-  // Avatar is only included once isMobile is determined and is false (desktop)
-  const slides =
-    isMobile === false
-      ? [{ type: "avatar" as const }, ...imageSlides]
-      : imageSlides;
-
   const totalSlides = slides.length;
-  // Clamp index defensively in case slides shrinks before the reset effect fires
-  const safeIndex = Math.min(currentSlide, totalSlides - 1);
-  const currentSlideData = slides[safeIndex];
 
-  /**
-   * Navigate to the next slide (wraps around to start)
-   */
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % totalSlides);
-  };
+  }, [totalSlides]);
 
-  /**
-   * Navigate to the previous slide (wraps around to end)
-   */
-  const prevSlide = () => {
+  const prevSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
-  };
+  }, [totalSlides]);
 
-  /**
-   * Jump to a specific slide by index
-   */
-  const goToSlide = (index: number) => {
+  const goToSlide = useCallback((index: number) => {
     setCurrentSlide(index);
-  };
+  }, []);
 
   // Framer Motion variants for slide animations
   const slideVariants = {
@@ -83,6 +73,9 @@ export function HeroCarousel() {
     }),
   };
 
+  // Defensive: modulo prevents out-of-bounds even if state is stale
+  const safeIndex = currentSlide % totalSlides;
+  const currentSlideData = slides[safeIndex];
 
   return (
     <div className="relative w-full max-w-lg mx-auto">
