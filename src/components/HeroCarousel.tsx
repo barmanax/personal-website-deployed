@@ -78,7 +78,7 @@ export function HeroCarousel() {
   const currentSlideData = slides[safeIndex];
 
   return (
-    <div className="relative w-full max-w-lg mx-auto">
+    <div className="relative w-full sm:max-w-lg mx-auto">
       {/* Main carousel container - gray background only for image slides */}
       <div
         className={`relative h-[450px] sm:h-[500px] lg:h-[550px] overflow-hidden rounded-2xl ${
