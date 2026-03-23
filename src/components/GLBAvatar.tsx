@@ -36,7 +36,7 @@ function Model({ onLoad, onClick }: { onLoad: () => void; onClick: () => void })
         action.reset().fadeIn(0.3).play();
         // Jump to 25% through the clip so the idle pose looks more natural on load
         if (currentAnimIndex === 0) {
-          action.time = action.getClip().duration * 0.25;
+          action.time = action.getClip().duration * 0.4;
         }
       }
     }
