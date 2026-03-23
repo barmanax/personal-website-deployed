@@ -29,9 +29,16 @@ function Model({ onLoad, onClick }: { onLoad: () => void; onClick: () => void })
       // Stop all animations first
       Object.values(actions).forEach((action) => action?.stop());
 
-      // Play the current animation
+      // Play the current animation, seeking to 1/4 through on first load
       const animName = names[currentAnimIndex % names.length];
-      actions[animName]?.reset().fadeIn(0.3).play();
+      const action = actions[animName];
+      if (action) {
+        action.reset().fadeIn(0.3).play();
+        // Jump to 25% through the clip so the idle pose looks more natural on load
+        if (currentAnimIndex === 0) {
+          action.time = action.getClip().duration * 0.25;
+        }
+      }
     }
   }, [actions, names, currentAnimIndex]);
 
