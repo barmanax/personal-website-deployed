@@ -14,7 +14,8 @@ import Image from "next/image";
 export function HeroCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  // null = not yet determined (SSR); false/true set after mount
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
   // Detect mobile after mount (window is unavailable during SSR)
   useEffect(() => {
@@ -24,22 +25,26 @@ export function HeroCarousel() {
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  // Clamp currentSlide if the slide count shrinks (e.g. avatar removed on resize)
+  // Reset to slide 0 whenever the slide set changes (mobile ↔ desktop)
   useEffect(() => {
-    setCurrentSlide(0);
+    if (isMobile !== null) setCurrentSlide(0);
   }, [isMobile]);
 
-  // Avatar is only included in the slide list on non-mobile
-  const allSlides = [
-    { type: "avatar" as const },
+  const imageSlides = [
     { type: "image" as const, src: "/profile-1.png", alt: "Profile photo 1" },
     { type: "image" as const, src: "/profile-2.JPG", alt: "Profile photo 2" },
   ];
-  const slides = isMobile
-    ? allSlides.filter((s) => s.type !== "avatar")
-    : allSlides;
+
+  // Avatar is only included once isMobile is determined and is false (desktop)
+  const slides =
+    isMobile === false
+      ? [{ type: "avatar" as const }, ...imageSlides]
+      : imageSlides;
 
   const totalSlides = slides.length;
+  // Clamp index defensively in case slides shrinks before the reset effect fires
+  const safeIndex = Math.min(currentSlide, totalSlides - 1);
+  const currentSlideData = slides[safeIndex];
 
   /**
    * Navigate to the next slide (wraps around to start)
@@ -78,7 +83,6 @@ export function HeroCarousel() {
     }),
   };
 
-  const currentSlideData = slides[currentSlide];
 
   return (
     <div className="relative w-full max-w-lg mx-auto">
@@ -92,7 +96,7 @@ export function HeroCarousel() {
       >
         <AnimatePresence initial={false} custom={1}>
           <motion.div
-            key={currentSlide}
+            key={safeIndex}
             custom={1}
             variants={slideVariants}
             initial="enter"
@@ -112,7 +116,7 @@ export function HeroCarousel() {
                 alt={currentSlideData.alt}
                 fill
                 className="object-cover"
-                priority={currentSlide === 0}
+                priority={safeIndex === 0}
               />
             )}
           </motion.div>
@@ -155,12 +159,12 @@ export function HeroCarousel() {
             key={index}
             onClick={() => goToSlide(index)}
             className={`h-2 rounded-full transition-all ${
-              index === currentSlide
+              index === safeIndex
                 ? "w-8 bg-accent"
                 : "w-2 bg-surface-300 dark:bg-surface-700 hover:bg-surface-400 dark:hover:bg-surface-600"
             }`}
             aria-label={`Go to slide ${index + 1}`}
-            aria-current={index === currentSlide}
+            aria-current={index === safeIndex}
           />
         ))}
       </div>
