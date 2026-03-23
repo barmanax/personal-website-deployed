@@ -1,25 +1,43 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { GLBAvatar } from "./GLBAvatar";
 import Image from "next/image";
 
 /**
- * Hero carousel component -rotates between 3D avatar and profile images
- * Supports keyboard navigation, click navigation, and swipe gestures
+ * Hero carousel component - rotates between 3D avatar and profile images.
+ * On mobile (< 768px) the 3D avatar is omitted to avoid WebGL rendering issues
+ * and arm-clipping on narrow screens; only the two static photos are shown.
  */
 export function HeroCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Define slides: avatar + 2 images
-  const slides = [
+  // Detect mobile after mount (window is unavailable during SSR)
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  // Clamp currentSlide if the slide count shrinks (e.g. avatar removed on resize)
+  useEffect(() => {
+    setCurrentSlide(0);
+  }, [isMobile]);
+
+  // Avatar is only included in the slide list on non-mobile
+  const allSlides = [
     { type: "avatar" as const },
     { type: "image" as const, src: "/profile-1.png", alt: "Profile photo 1" },
     { type: "image" as const, src: "/profile-2.JPG", alt: "Profile photo 2" },
   ];
+  const slides = isMobile
+    ? allSlides.filter((s) => s.type !== "avatar")
+    : allSlides;
 
   const totalSlides = slides.length;
 
