@@ -36,7 +36,7 @@ function Model({ onLoad, onClick }: { onLoad: () => void; onClick: () => void })
         action.reset().fadeIn(0.3).play();
         // Jump to 25% through the clip so the idle pose looks more natural on load
         if (currentAnimIndex === 0) {
-          action.time = action.getClip().duration * 0.4;
+          action.time = action.getClip().duration * 0.45;
         }
       }
     }
@@ -69,7 +69,7 @@ export function GLBAvatar() {
   return (
     <div className="relative h-full w-full">
       <Canvas
-        camera={{ position: [0, 1, 5.5], fov: 50 }}
+        camera={{ position: [0, 1.8, 5.5], fov: 50 }}
         gl={{ alpha: true }}
         className="rounded-xl"
       >
