@@ -3,7 +3,7 @@
 import { FadeIn } from "@/components/FadeIn";
 import { PageTransition } from "@/components/PageTransition";
 import { siteConfig } from "@/data/content";
-import { Github, Linkedin, Mail, FileDown } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
 
 const socialLinks = [
   {
@@ -26,7 +26,7 @@ const socialLinks = [
   },
 ];
 
-/** Connect page -social links and resume viewer */
+/** Connect page -social links */
 export default function ConnectPage() {
   return (
     <PageTransition>
@@ -68,36 +68,6 @@ export default function ConnectPage() {
           ))}
         </div>
 
-        {/* Resume section */}
-        <FadeIn>
-          <div className="rounded-xl border border-surface-200 dark:border-surface-800 overflow-hidden">
-            <div className="flex items-center justify-between bg-surface-50 dark:bg-surface-900/50 px-6 py-4">
-              <h2 className="text-xl font-semibold">Resume</h2>
-              <a
-                href="/resume.pdf"
-                download
-                className="flex items-center gap-2 rounded-lg bg-accent px-4 py-2
-                           text-sm font-medium text-white hover:bg-accent-dark
-                           transition-colors"
-              >
-                <FileDown size={16} />
-                Download
-              </a>
-            </div>
-
-            {/* PDF embed -falls back gracefully if no PDF is present */}
-            <div className="relative h-[600px] w-full bg-surface-100 dark:bg-surface-900">
-              <iframe
-                src="/resume.pdf"
-                className="h-full w-full"
-                title="Resume"
-              />
-              {/* Fallback message if iframe doesn't load */}
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              </div>
-            </div>
-          </div>
-        </FadeIn>
       </section>
     </PageTransition>
   );
