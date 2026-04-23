@@ -8,6 +8,9 @@
 # ============================================
 # SENSITIVE - Never commit these!
 # ============================================
+# Resume (kept locally but not published to GitHub)
+public/resume.pdf
+
 # Environment variables (API keys, secrets, passwords)
 .env
 .env.local
