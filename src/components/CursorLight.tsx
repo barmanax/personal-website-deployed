@@ -4,29 +4,24 @@ import { useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
 
 /**
- * Renders a dark overlay with a transparent radial gradient centered on the
- * cursor, creating a "flashlight" effect in dark mode.
- *
- * The overlay sits above page content (z-30) but uses pointer-events-none so
- * it never blocks clicks or hover states. We defer rendering until after mount
- * to avoid a next-themes hydration mismatch on resolvedTheme.
+ * Renders a soft radial glow that follows the cursor in dark mode.
+ * Uses an additive approach (glow element at cursor) rather than a subtractive
+ * overlay, so it brightens the cursor area without dimming the rest of the page.
  */
 export function CursorLight() {
   const { resolvedTheme } = useTheme();
-  const overlayRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
-    const el = overlayRef.current;
+    const el = glowRef.current;
     if (!el || resolvedTheme !== "dark") return;
 
     const onMove = (e: MouseEvent) => {
-      el.style.setProperty("--cx", `${e.clientX}px`);
-      el.style.setProperty("--cy", `${e.clientY}px`);
+      el.style.left = `${e.clientX}px`;
+      el.style.top = `${e.clientY}px`;
     };
 
     window.addEventListener("mousemove", onMove);
@@ -37,12 +32,17 @@ export function CursorLight() {
 
   return (
     <div
-      ref={overlayRef}
-      className="pointer-events-none fixed inset-0 z-30"
+      ref={glowRef}
+      className="pointer-events-none fixed z-30 -translate-x-1/2 -translate-y-1/2"
       style={{
-        // Start the light off-screen until the mouse enters the window
+        width: "280px",
+        height: "280px",
+        borderRadius: "50%",
         background:
-          "radial-gradient(circle 120px at var(--cx, -500px) var(--cy, -500px), transparent 0%, rgba(0,0,0,0.92) 100%)",
+          "radial-gradient(circle, rgba(255,255,255,0.09) 0%, transparent 70%)",
+        // Start off-screen until mouse enters
+        left: "-500px",
+        top: "-500px",
       }}
     />
   );
