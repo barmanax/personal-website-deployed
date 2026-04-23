@@ -42,7 +42,7 @@ export function CursorLight() {
       style={{
         // Start the light off-screen until the mouse enters the window
         background:
-          "radial-gradient(circle 220px at var(--cx, -500px) var(--cy, -500px), transparent 0%, rgba(0,0,0,0.82) 100%)",
+          "radial-gradient(circle 120px at var(--cx, -500px) var(--cy, -500px), transparent 0%, rgba(0,0,0,0.92) 100%)",
       }}
     />
   );
