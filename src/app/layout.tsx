@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Analytics } from "@vercel/analytics/next";
+import { CursorLight } from "@/components/CursorLight";
 
 /**
  * Inter -clean, modern sans-serif from Google Fonts.
@@ -44,6 +45,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange={false}
         >
+          <CursorLight />
           <Navbar />
           {/* pt-20 offsets the fixed navbar height */}
           <main className="min-h-screen pt-20">{children}</main>
