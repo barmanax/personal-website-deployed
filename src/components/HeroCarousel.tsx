@@ -1,79 +1,36 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import dynamic from "next/dynamic";
-import Image from "next/image";
 
-/*
- * Load the 3D avatar client-side only and code-split it: three.js is heavy,
- * and the avatar slide is desktop-only anyway (added after mount).
- */
-const GLBAvatar = dynamic(
-  () => import("./GLBAvatar").then((m) => m.GLBAvatar),
-  { ssr: false }
-);
-
-/* Canvas-based, so client-only as well (no three.js involved) */
+/* Canvas-based, so client-only (theme color is read from the DOM) */
 const AsciiPortrait = dynamic(
   () => import("./fx/AsciiPortrait").then((m) => m.AsciiPortrait),
   { ssr: false }
 );
 
-type Slide =
-  | { type: "avatar"; src?: undefined; alt?: undefined }
-  | { type: "image"; src: string; alt: string }
-  | { type: "ascii"; src: string; alt: string };
-
 /**
- * All possible slide definitions. The ASCII portrait leads (it reveals the
- * real photo on hover, so the raw copy of that photo isn't a slide).
+ * Every slide is a photo rendered as ASCII art; hovering reveals the
+ * original. Same treatment everywhere keeps the hero visually coherent.
  */
-const ALL_SLIDES: Slide[] = [
-  { type: "ascii", src: "/profile-1.png", alt: "ASCII portrait of Aditya" },
-  { type: "avatar" },
-  { type: "image", src: "/profile-2.JPG", alt: "Profile photo" },
+const SLIDES = [
+  { src: "/profile-1.png", alt: "ASCII portrait of Aditya (headshot)" },
+  { src: "/profile-2.JPG", alt: "ASCII portrait of Aditya in Chicago" },
 ];
 
-/** Slides for mobile - everything except the heavy 3D avatar */
-const MOBILE_SLIDES: Slide[] = ALL_SLIDES.filter((s) => s.type !== "avatar");
-
-/**
- * Hero carousel component - rotates between 3D avatar and profile images.
- * On mobile (< 768px) the 3D avatar is excluded to avoid rendering issues.
- */
+/** Hero carousel - rotates between ASCII-rendered portraits */
 export function HeroCarousel() {
-  // Start with image-only slides (safe for SSR), upgrade to full set after mount
-  const [slides, setSlides] = useState(MOBILE_SLIDES);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
-  useEffect(() => {
-    const update = () => {
-      const mobile = window.innerWidth < 768;
-      const newSlides = mobile ? MOBILE_SLIDES : ALL_SLIDES;
-      // Batch both updates so React renders them together — no intermediate state
-      setSlides(newSlides);
-      setCurrentSlide(0);
-    };
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
+  const nextSlide = useCallback(() => {
+    setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
   }, []);
 
-  const totalSlides = slides.length;
-
-  const nextSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev + 1) % totalSlides);
-  }, [totalSlides]);
-
   const prevSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
-  }, [totalSlides]);
-
-  const goToSlide = useCallback((index: number) => {
-    setCurrentSlide(index);
+    setCurrentSlide((prev) => (prev - 1 + SLIDES.length) % SLIDES.length);
   }, []);
 
   // Framer Motion variants for slide animations
@@ -82,33 +39,23 @@ export function HeroCarousel() {
       x: direction > 0 ? 300 : -300,
       opacity: 0,
     }),
-    center: {
-      x: 0,
-      opacity: 1,
-    },
+    center: { x: 0, opacity: 1 },
     exit: (direction: number) => ({
       x: direction > 0 ? -300 : 300,
       opacity: 0,
     }),
   };
 
-  // Defensive: modulo prevents out-of-bounds even if state is stale
-  const safeIndex = currentSlide % totalSlides;
-  const currentSlideData = slides[safeIndex];
-
   return (
     <div className="relative w-full sm:max-w-lg mx-auto">
-      {/* Main carousel container - gray background only for image slides */}
       <div
-        className={`relative aspect-[3/4] sm:aspect-auto sm:h-[500px] lg:h-[550px] overflow-hidden rounded-md border border-ide-border ${
-          currentSlideData.type === "image" ? "bg-ide-bg-alt" : ""
-        }`}
+        className="relative aspect-[3/4] sm:aspect-auto sm:h-[500px] lg:h-[550px] overflow-hidden rounded-md border border-ide-border"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
         <AnimatePresence initial={false} custom={1}>
           <motion.div
-            key={safeIndex}
+            key={currentSlide}
             custom={1}
             variants={slideVariants}
             initial="enter"
@@ -118,24 +65,12 @@ export function HeroCarousel() {
               x: { type: "spring", stiffness: 300, damping: 30 },
               opacity: { duration: 0.2 },
             }}
-            className="absolute inset-0 flex items-center justify-center"
+            className="absolute inset-0"
           >
-            {currentSlideData.type === "avatar" ? (
-              <GLBAvatar />
-            ) : currentSlideData.type === "ascii" ? (
-              <AsciiPortrait
-                src={currentSlideData.src}
-                alt={currentSlideData.alt}
-              />
-            ) : (
-              <Image
-                src={currentSlideData.src}
-                alt={currentSlideData.alt}
-                fill
-                className="object-cover"
-                priority={safeIndex === 0}
-              />
-            )}
+            <AsciiPortrait
+              src={SLIDES[currentSlide].src}
+              alt={SLIDES[currentSlide].alt}
+            />
           </motion.div>
         </AnimatePresence>
 
@@ -169,17 +104,17 @@ export function HeroCarousel() {
 
       {/* Dot indicators */}
       <div className="flex justify-center gap-2 mt-4">
-        {slides.map((_, index) => (
+        {SLIDES.map((_, index) => (
           <button
             key={index}
-            onClick={() => goToSlide(index)}
+            onClick={() => setCurrentSlide(index)}
             className={`h-2 rounded-full transition-all ${
-              index === safeIndex
+              index === currentSlide
                 ? "w-8 bg-ide-accent"
                 : "w-2 bg-ide-border hover:bg-ide-fg-muted"
             }`}
             aria-label={`Go to slide ${index + 1}`}
-            aria-current={index === safeIndex}
+            aria-current={index === currentSlide}
           />
         ))}
       </div>
