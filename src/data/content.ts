@@ -7,8 +7,6 @@
  * unreleased-product details that only belong on a privately shared resume.
  */
 
-import React from "react";
-
 export const siteConfig = {
   name: "Aditya Barman",
   tagline: "CS + Statistics @ UIUC",
@@ -19,17 +17,8 @@ export const siteConfig = {
   linkedin: "https://www.linkedin.com/in/adityabarman/",
 };
 
-export const aboutText = React.createElement(
-  "span",
-  null,
-  "I'm a Computer Science and Statistics student at the University of Illinois Urbana-Champaign. I love building full-stack applications, exploring data-driven insights, and learning new concepts. When I'm not coding, you'll find me playing sports, listening to music, traveling the world, and rating food spots on ",
-  React.createElement(
-    "a",
-    { href: "https://beliapp.co/app/adityabarman", target: "_blank", rel: "noopener noreferrer", className: "text-ide-accent hover:underline" },
-    "Beli"
-  ),
-  "."
-);
+export const aboutText =
+  "I'm a Computer Science and Statistics student at the University of Illinois Urbana-Champaign. I love building full-stack applications, exploring data-driven insights, and learning new concepts. When I'm not coding, you'll find me playing sports, listening to music, traveling the world, and rating food spots on Beli.";
 
 /** The three role-based filter tabs shown in the tech stack section */
 export type TechCategory = "fullstack" | "backend" | "data";

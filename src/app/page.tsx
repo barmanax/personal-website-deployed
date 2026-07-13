@@ -1,25 +1,16 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { FadeIn } from "@/components/FadeIn";
 import { HeroCarousel } from "@/components/HeroCarousel";
 import { siteConfig, aboutText } from "@/data/content";
 import { TechStack } from "@/components/TechStack";
-
-/* Client-only WebGL background - code-split and skipped during SSR */
-const HeroShader = dynamic(
-  () => import("@/components/fx/HeroShader").then((m) => m.HeroShader),
-  { ssr: false }
-);
 
 /** Home page - hero section, about blurb, and tech stack display */
 export default function Home() {
   return (
     <>
       {/* ── Hero Section ── */}
-      {/* relative isolate scopes the shader's -z-10 to this section */}
-      <section className="section-container relative isolate">
-        <HeroShader />
+      <section className="section-container">
         <div className="flex flex-col items-center gap-12 lg:flex-row lg:gap-16">
           {/* Left - Intro text */}
           <FadeIn className="flex-1 space-y-6 text-center lg:text-left">
