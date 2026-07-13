@@ -17,19 +17,18 @@ export function ThemeToggle() {
 
   if (!mounted) {
     /* Render a placeholder the same size to prevent layout shift */
-    return <div className="h-9 w-9" />;
+    return <div className="h-7 w-7" />;
   }
 
   return (
     <button
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-      className="relative flex h-9 w-9 items-center justify-center rounded-full
-                 text-surface-600 hover:text-surface-900 dark:text-surface-400
-                 dark:hover:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-800
+      className="relative flex h-7 w-7 items-center justify-center rounded
+                 text-ide-fg-muted hover:bg-ide-bg-hover hover:text-ide-fg
                  transition-colors"
       aria-label={`Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode`}
     >
-      {resolvedTheme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+      {resolvedTheme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
     </button>
   );
 }

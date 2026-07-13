@@ -5,58 +5,74 @@ import { FadeIn } from "@/components/FadeIn";
 import { projects, siteConfig, Project } from "@/data/content";
 import { Github, ExternalLink } from "lucide-react";
 
-/** Projects page -responsive card grid showcasing portfolio work */
+/** Projects page - responsive card grid showcasing portfolio work */
 export default function ProjectsPage() {
   return (
     <section className="section-container">
-        <FadeIn>
-          <h1 className="section-heading mb-4">Projects</h1>
-          <p className="mb-12 text-surface-500 dark:text-surface-400">
-            A selection of things I&apos;ve built and explored.
-          </p>
-        </FadeIn>
+      <FadeIn>
+        <h1 className="section-heading mb-4">
+          <span className="code-comment">{"// "}</span>Projects
+        </h1>
+        <p className="mb-12 text-ide-fg-muted">
+          A selection of things I&apos;ve built and explored.
+        </p>
+      </FadeIn>
 
-        {/* Responsive card grid -1 col on mobile, 2 on larger screens */}
-        <div className="grid gap-6 sm:grid-cols-2">
-          {projects.map((project, i) => (
-            <ProjectCard key={project.title} project={project} index={i} />
-          ))}
-        </div>
+      {/* Responsive card grid - 1 col on mobile, 2 on larger screens */}
+      <div className="grid gap-6 sm:grid-cols-2">
+        {projects.map((project, i) => (
+          <ProjectCard key={project.title} project={project} index={i} />
+        ))}
+      </div>
 
-        {/* GitHub CTA */}
-        <FadeIn delay={projects.length * 0.1}>
-          <p className="mt-12 text-center text-surface-500 dark:text-surface-400">
-            …and much more on my{" "}
-            <a
-              href={siteConfig.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-accent hover:underline font-medium"
-            >
-              GitHub
-            </a>
-          </p>
-        </FadeIn>
+      {/* GitHub CTA */}
+      <FadeIn delay={projects.length * 0.1}>
+        <p className="mt-12 text-center text-ide-fg-muted">
+          …and much more on my{" "}
+          <a
+            href={siteConfig.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-ide-accent hover:underline"
+          >
+            GitHub
+          </a>
+        </p>
+      </FadeIn>
     </section>
   );
 }
 
 /**
- * Project card with thumbnail, title, description, tech tags, and links.
- * Hover effect lifts the card and highlights the border.
+ * Project card styled as a mini editor window: a title-bar strip with
+ * window dots and the project name, then thumbnail and body.
  */
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
     <FadeIn delay={index * 0.1}>
       <div
-        className="group overflow-hidden rounded-xl border border-surface-200
-                   dark:border-surface-800 bg-surface-50 dark:bg-surface-900/50
-                   transition-all duration-300 hover:border-accent/40
-                   hover:-translate-y-1 hover:shadow-lg hover:shadow-accent/5"
+        className="group flex h-full flex-col overflow-hidden rounded-md border border-ide-border
+                   bg-ide-bg-alt/50 transition-all duration-300
+                   hover:-translate-y-1 hover:border-ide-accent/60 hover:shadow-lg"
       >
+        {/* Mini title bar */}
+        <div className="flex items-center gap-2 border-b border-ide-border bg-ide-bg-alt px-3 py-2">
+          <div aria-hidden className="flex items-center gap-1">
+            <span className="h-2 w-2 rounded-full bg-[#ff5f57]" />
+            <span className="h-2 w-2 rounded-full bg-[#febc2e]" />
+            <span className="h-2 w-2 rounded-full bg-[#28c840]" />
+          </div>
+          <span className="truncate font-mono text-xs text-ide-fg-muted">
+            {project.title.toLowerCase().replace(/[\s.]+/g, "-")}
+          </span>
+          <span className="ml-auto shrink-0 font-mono text-[10px] text-ide-fg-muted">
+            {project.date}
+          </span>
+        </div>
+
         {/* Thumbnail */}
         {project.image && (
-          <div className="relative h-48 w-full overflow-hidden bg-surface-100 dark:bg-surface-800">
+          <div className="relative h-44 w-full overflow-hidden bg-ide-bg-hover">
             <Image
               src={project.image}
               alt={project.title}
@@ -67,44 +83,34 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         )}
 
         {/* Content */}
-        <div className="p-6">
-          <div className="mb-2 flex items-baseline justify-between gap-2">
-            <h3 className="text-lg font-semibold group-hover:text-accent transition-colors">
-              {project.title}
-            </h3>
-            <span className="shrink-0 text-xs text-surface-500 dark:text-surface-500">
-              {project.date}
-            </span>
-          </div>
-          <p className="mb-4 text-sm text-surface-600 dark:text-surface-400 leading-relaxed">
+        <div className="flex flex-1 flex-col p-5">
+          <h3 className="mb-2 font-mono text-lg font-semibold text-ide-fg transition-colors group-hover:text-ide-accent">
+            {project.title}
+          </h3>
+          <p className="mb-4 text-sm leading-relaxed text-ide-fg-muted">
             {project.description}
           </p>
 
           {/* Tech tags */}
-          <div className="mb-4 flex flex-wrap gap-2">
+          <div className="mb-4 mt-auto flex flex-wrap gap-1.5">
             {project.techTags.map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full bg-surface-100 dark:bg-surface-800 px-3 py-1
-                           text-xs font-medium text-surface-600 dark:text-surface-400"
-              >
+              <span key={tag} className="code-chip">
                 {tag}
               </span>
             ))}
           </div>
 
           {/* Links */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             {project.github && (
               <a
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-sm text-surface-500
-                           hover:text-accent transition-colors"
+                className="flex items-center gap-1.5 font-mono text-xs text-ide-fg-muted transition-colors hover:text-ide-accent"
               >
-                <Github size={16} />
-                Code
+                <Github size={14} />
+                code
               </a>
             )}
             {project.live && (
@@ -112,11 +118,10 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 href={project.live}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-sm text-surface-500
-                           hover:text-accent transition-colors"
+                className="flex items-center gap-1.5 font-mono text-xs text-ide-fg-muted transition-colors hover:text-ide-accent"
               >
-                <ExternalLink size={16} />
-                Live
+                <ExternalLink size={14} />
+                live
               </a>
             )}
           </div>
