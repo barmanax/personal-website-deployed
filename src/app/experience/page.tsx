@@ -105,7 +105,9 @@ function EducationCard({
             <GraduationCap size={18} className="text-ide-accent" />
             {entry.institution}
           </h3>
-          <span className="code-chip shrink-0">{entry.graduation}</span>
+          {entry.graduation && (
+            <span className="code-chip shrink-0">{entry.graduation}</span>
+          )}
         </div>
         <p className="mb-1 text-sm font-medium text-ide-accent">
           {entry.degree}

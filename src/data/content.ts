@@ -153,7 +153,8 @@ export interface EducationEntry {
   institution: string;
   location: string;
   degree: string;
-  graduation: string;
+  /** Omit to keep the graduation date off the public site */
+  graduation?: string;
   gpa?: string;
   honors?: string[];
   activities?: string[];
@@ -166,7 +167,6 @@ export const education: EducationEntry[] = [
     institution: "University of Illinois at Urbana-Champaign",
     location: "Champaign, IL",
     degree: "B.S. Computer Science & Statistics, Minor in Mathematics",
-    graduation: "May 2027",
     gpa: "3.97/4.0",
     honors: ["James Scholars Honors Program"],
     activities: [
