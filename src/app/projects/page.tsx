@@ -2,15 +2,13 @@
 
 import Image from "next/image";
 import { FadeIn } from "@/components/FadeIn";
-import { PageTransition } from "@/components/PageTransition";
 import { projects, siteConfig, Project } from "@/data/content";
 import { Github, ExternalLink } from "lucide-react";
 
 /** Projects page -responsive card grid showcasing portfolio work */
 export default function ProjectsPage() {
   return (
-    <PageTransition>
-      <section className="section-container">
+    <section className="section-container">
         <FadeIn>
           <h1 className="section-heading mb-4">Projects</h1>
           <p className="mb-12 text-surface-500 dark:text-surface-400">
@@ -39,8 +37,7 @@ export default function ProjectsPage() {
             </a>
           </p>
         </FadeIn>
-      </section>
-    </PageTransition>
+    </section>
   );
 }
 

@@ -1,7 +1,6 @@
 "use client";
 
 import { FadeIn } from "@/components/FadeIn";
-import { PageTransition } from "@/components/PageTransition";
 import { siteConfig } from "@/data/content";
 import { Github, Linkedin, Mail } from "lucide-react";
 
@@ -29,8 +28,7 @@ const socialLinks = [
 /** Connect page -social links */
 export default function ConnectPage() {
   return (
-    <PageTransition>
-      <section className="section-container">
+    <section className="section-container">
         <FadeIn>
           <h1 className="section-heading mb-4">Let&apos;s Connect</h1>
           <p className="mb-12 text-surface-500 dark:text-surface-400">
@@ -67,8 +65,6 @@ export default function ConnectPage() {
             </FadeIn>
           ))}
         </div>
-
-      </section>
-    </PageTransition>
+    </section>
   );
 }

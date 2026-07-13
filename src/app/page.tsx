@@ -1,7 +1,6 @@
 "use client";
 
 import { FadeIn } from "@/components/FadeIn";
-import { PageTransition } from "@/components/PageTransition";
 import { HeroCarousel } from "@/components/HeroCarousel";
 import { siteConfig, aboutText } from "@/data/content";
 import { TechStack } from "@/components/TechStack";
@@ -9,7 +8,7 @@ import { TechStack } from "@/components/TechStack";
 /** Home page -hero section, about blurb, and tech stack display */
 export default function Home() {
   return (
-    <PageTransition>
+    <>
       {/* ── Hero Section ── */}
       <section className="section-container">
         <div className="flex flex-col items-center gap-12 lg:flex-row lg:gap-16">
@@ -51,7 +50,7 @@ export default function Home() {
         </FadeIn>
         <TechStack />
       </section>
-    </PageTransition>
+    </>
   );
 }
 

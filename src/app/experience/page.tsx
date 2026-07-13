@@ -1,15 +1,13 @@
 "use client";
 
 import { FadeIn } from "@/components/FadeIn";
-import { PageTransition } from "@/components/PageTransition";
 import { experience, education, ExperienceEntry, EducationEntry } from "@/data/content";
 import { Briefcase, GraduationCap } from "lucide-react";
 
 /** Experience page - vertical work timeline followed by an education section */
 export default function ExperiencePage() {
   return (
-    <PageTransition>
-      <section className="section-container">
+    <section className="section-container">
         <FadeIn>
           <h1 className="section-heading mb-4">Experience</h1>
           <p className="mb-12 text-surface-500 dark:text-surface-400">
@@ -38,8 +36,7 @@ export default function ExperiencePage() {
             <EducationCard key={entry.institution} entry={entry} index={i} />
           ))}
         </div>
-      </section>
-    </PageTransition>
+    </section>
   );
 }
 

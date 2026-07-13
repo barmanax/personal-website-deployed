@@ -2,10 +2,8 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
+import { IDEShell } from "@/components/ide/IDEShell";
 import { Analytics } from "@vercel/analytics/next";
-import { CursorLight } from "@/components/CursorLight";
 
 /**
  * Inter -clean, modern sans-serif from Google Fonts.
@@ -37,7 +35,7 @@ export const metadata: Metadata = {
 };
 
 /**
- * Root layout -wraps every page with the theme provider, navbar, and footer.
+ * Root layout -wraps every page with the theme provider and the IDE shell.
  * The `suppressHydrationWarning` on <html> is required by next-themes to
  * avoid a React hydration mismatch when the class attribute is injected.
  */
@@ -55,11 +53,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange={false}
         >
-          <CursorLight />
-          <Navbar />
-          {/* pt-20 offsets the fixed navbar height */}
-          <main className="min-h-screen pt-20">{children}</main>
-          <Footer />
+          {/* The IDE chrome persists across navigation; pages swap inside its editor pane */}
+          <IDEShell>{children}</IDEShell>
         </ThemeProvider>
         <Analytics />
       </body>
