@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { X } from "lucide-react";
 import { ideFiles } from "./ide.config";
+import { ScrambleText } from "@/components/fx/ScrambleText";
 
 /**
  * Editor tab strip - all four pages are permanently "open" tabs.
@@ -38,7 +39,7 @@ export function TabBar() {
               <span aria-hidden className="absolute inset-x-0 top-0 h-px bg-ide-accent" />
             )}
             <f.icon size={13} className={`shrink-0 ${f.iconClass}`} />
-            {f.file}
+            <ScrambleText text={f.file} />
             {/* Decorative close glyph, VS Code style */}
             <X
               size={12}

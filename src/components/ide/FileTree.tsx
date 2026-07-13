@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, FolderOpen } from "lucide-react";
 import { ideFiles } from "./ide.config";
+import { ScrambleText } from "@/components/fx/ScrambleText";
 
 /**
  * Explorer-style file tree used as the site navigation.
@@ -49,7 +50,7 @@ export function FileTree({ onNavigate }: { onNavigate?: () => void }) {
                 }`}
               >
                 <f.icon size={14} className={`shrink-0 ${f.iconClass}`} />
-                {f.file}
+                <ScrambleText text={f.file} />
               </Link>
             </li>
           );
