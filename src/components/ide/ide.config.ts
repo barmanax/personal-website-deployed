@@ -1,0 +1,31 @@
+import { LucideIcon, FileCode2, FileText, FileJson2, Braces } from "lucide-react";
+
+/**
+ * A page presented as a "file" in the IDE metaphor.
+ * Single source of truth consumed by FileTree, TabBar, StatusBar, and 404.
+ */
+export interface IDEFile {
+  /** Route path, e.g. "/experience" */
+  path: string;
+  /** Display filename, e.g. "experience.md" */
+  file: string;
+  /** Language label shown in the status bar */
+  language: string;
+  /** File-type icon */
+  icon: LucideIcon;
+  /** Tailwind text-color class for the icon (syntax-token colors) */
+  iconClass: string;
+}
+
+/** The four pages, presented as open files in the editor */
+export const ideFiles: IDEFile[] = [
+  { path: "/", file: "home.tsx", language: "TypeScript JSX", icon: FileCode2, iconClass: "text-syn-func" },
+  { path: "/experience", file: "experience.md", language: "Markdown", icon: FileText, iconClass: "text-syn-string" },
+  { path: "/projects", file: "projects.ts", language: "TypeScript", icon: Braces, iconClass: "text-ide-accent" },
+  { path: "/connect", file: "connect.json", language: "JSON", icon: FileJson2, iconClass: "text-syn-number" },
+];
+
+/** Look up the file entry for the current route (undefined on unknown routes) */
+export function fileForPath(pathname: string): IDEFile | undefined {
+  return ideFiles.find((f) => f.path === pathname);
+}
