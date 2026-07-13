@@ -3,8 +3,17 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { GLBAvatar } from "./GLBAvatar";
+import dynamic from "next/dynamic";
 import Image from "next/image";
+
+/*
+ * Load the 3D avatar client-side only and code-split it: three.js is heavy,
+ * and the avatar slide is desktop-only anyway (added after mount).
+ */
+const GLBAvatar = dynamic(
+  () => import("./GLBAvatar").then((m) => m.GLBAvatar),
+  { ssr: false }
+);
 
 type Slide =
   | { type: "avatar"; src?: undefined; alt?: undefined }

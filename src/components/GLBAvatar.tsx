@@ -1,19 +1,26 @@
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, useGLTF, useAnimations, Environment } from "@react-three/drei";
+import { OrbitControls, useGLTF, useAnimations, AsciiRenderer } from "@react-three/drei";
 import { Suspense, useEffect, useRef, useState } from "react";
+import { useTheme } from "next-themes";
 import * as THREE from "three";
 
 /**
- * 3D avatar using a GLB model file with animation support.
- * Place your avatar.glb file in the /public folder.
+ * 3D avatar rendered as real-time ASCII art.
  *
- * Click the avatar to trigger animations.
- * OrbitControls lets users drag to rotate, scroll to zoom.
+ * The GLB model renders to a hidden WebGL canvas; drei's <AsciiRenderer>
+ * converts each frame to a character grid overlaid on top. The overlay has
+ * pointer-events: none and the underlying canvas stays interactive, so
+ * click-to-animate and drag-to-rotate still work.
+ *
+ * Click the avatar to cycle its animations.
  */
 
-function Model({ onLoad, onClick }: { onLoad: () => void; onClick: () => void }) {
+/** Braille spinner frames for the ASCII-flavored loading state */
+const SPINNER_FRAMES = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
+
+function Model({ onLoad }: { onLoad: () => void }) {
   const group = useRef<THREE.Group>(null);
   const { scene, animations } = useGLTF("/avatar.glb");
   const { actions, names } = useAnimations(animations, group);
@@ -29,12 +36,11 @@ function Model({ onLoad, onClick }: { onLoad: () => void; onClick: () => void })
       // Stop all animations first
       Object.values(actions).forEach((action) => action?.stop());
 
-      // Play the current animation, seeking to 1/4 through on first load
       const animName = names[currentAnimIndex % names.length];
       const action = actions[animName];
       if (action) {
         action.reset().fadeIn(0.3).play();
-        // Jump to 25% through the clip so the idle pose looks more natural on load
+        // Seek partway through the first clip so the idle pose looks natural on load
         if (currentAnimIndex === 0) {
           action.time = action.getClip().duration * 0.45;
         }
@@ -42,11 +48,10 @@ function Model({ onLoad, onClick }: { onLoad: () => void; onClick: () => void })
     }
   }, [actions, names, currentAnimIndex]);
 
-  const handleClick = (e: any) => {
+  const handleClick = (e: { stopPropagation: () => void }) => {
     e.stopPropagation();
     // Cycle to next animation
     setCurrentAnimIndex((prev) => prev + 1);
-    onClick();
   };
 
   return (
@@ -65,48 +70,75 @@ function Model({ onLoad, onClick }: { onLoad: () => void; onClick: () => void })
 
 export function GLBAvatar() {
   const [loaded, setLoaded] = useState(false);
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
+
+  /*
+   * ASCII characters take their color from the theme's foreground token.
+   * invert follows the theme too: light-on-dark needs the brightness-to-
+   * density mapping flipped relative to dark-on-light.
+   */
+  const fgColor = isDark ? "#abb2bf" : "#1f2328";
 
   return (
     <div className="relative h-full w-full">
       <Canvas
         camera={{ position: [0, 1.8, 5.5], fov: 50 }}
         gl={{ alpha: true }}
-        className="rounded-xl"
+        dpr={[1, 1.5]}
       >
         <Suspense fallback={null}>
-          {/* Soft ambient lighting */}
+          {/*
+           * ASCII output only needs luminance contrast, so lighting is
+           * simple: ambient base + key light + side fill. (The old HDR
+           * Environment preset was dropped - it cost a network fetch.)
+           */}
           <ambientLight intensity={0.9} />
+          <directionalLight position={[2, 3, 2]} intensity={1.2} />
+          <directionalLight position={[-2, 1, -1]} intensity={0.4} />
 
-          {/* Main directional light from front-top */}
-          <directionalLight position={[2, 3, 2]} intensity={1} />
+          <Model onLoad={() => setLoaded(true)} />
 
-          {/* Fill light from the side for softer shadows */}
-          <directionalLight position={[-2, 1, -1]} intensity={0.3} />
-
-          {/* Subtle rim light from behind */}
-          <pointLight position={[0, 2, -2]} intensity={0.4} color="#60a5fa" />
-
-          {/* Environment map for realistic reflections - background disabled for transparency */}
-          <Environment preset="city" background={false} />
-
-          <Model onLoad={() => setLoaded(true)} onClick={() => {}} />
+          <AsciiRenderer
+            fgColor={fgColor}
+            bgColor="transparent"
+            characters=" .:-+*=%@#"
+            invert={isDark}
+            resolution={0.18}
+          />
         </Suspense>
 
+        {/* Zoom disabled: scroll must keep scrolling the editor pane */}
         <OrbitControls
-          enableZoom={true}
+          enableZoom={false}
           enablePan={false}
-          minDistance={2}
-          maxDistance={5}
           target={[0, 0.2, 0]}
         />
       </Canvas>
 
-      {/* Loading state - only show when not loaded */}
-      {!loaded && (
-        <div className="absolute inset-0 flex items-center justify-center bg-surface-950/50 rounded-xl">
-          <div className="h-10 w-10 animate-spin rounded-full border-2 border-surface-700 border-t-accent" />
-        </div>
-      )}
+      {/* ASCII-flavored loading state */}
+      {!loaded && <AsciiSpinner />}
+    </div>
+  );
+}
+
+/** Centered mono loading indicator cycling through braille frames */
+function AsciiSpinner() {
+  const [frame, setFrame] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(
+      () => setFrame((f) => (f + 1) % SPINNER_FRAMES.length),
+      80
+    );
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <div className="absolute inset-0 flex items-center justify-center">
+      <p className="font-mono text-sm text-ide-fg-muted">
+        {SPINNER_FRAMES[frame]} loading avatar.glb
+      </p>
     </div>
   );
 }
