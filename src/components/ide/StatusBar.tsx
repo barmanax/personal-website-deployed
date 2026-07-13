@@ -1,9 +1,34 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Check, GitBranch, Github, Linkedin, Mail } from "lucide-react";
 import { fileForPath } from "./ide.config";
 import { siteConfig } from "@/data/content";
+
+/** Approximate text line height the fake Ln readout is denominated in */
+const LINE_HEIGHT_PX = 24;
+
+/**
+ * Derives an honest-but-playful "Ln" readout from the editor pane's scroll
+ * position - scrolling the page moves the cursor line, like a real editor.
+ */
+function useEditorLine(): number {
+  const [line, setLine] = useState(1);
+
+  useEffect(() => {
+    const pane = document.getElementById("editor-pane");
+    if (!pane) return;
+
+    const onScroll = () =>
+      setLine(Math.floor(pane.scrollTop / LINE_HEIGHT_PX) + 1);
+    onScroll();
+    pane.addEventListener("scroll", onScroll, { passive: true });
+    return () => pane.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return line;
+}
 
 const socialLinks = [
   { href: siteConfig.github, icon: Github, label: "GitHub" },
@@ -18,6 +43,7 @@ const socialLinks = [
 export function StatusBar() {
   const pathname = usePathname();
   const file = fileForPath(pathname);
+  const line = useEditorLine();
 
   return (
     <footer className="flex h-6 shrink-0 items-center gap-4 border-t border-ide-border bg-ide-bg-alt px-3 font-mono text-[11px] text-ide-fg-muted">
@@ -30,11 +56,14 @@ export function StatusBar() {
         0 errors
       </span>
 
-      <span className="ml-auto hidden sm:block">{file?.language ?? "Plain Text"}</span>
+      <span className="ml-auto hidden sm:block">Ln {line}, Col 1</span>
+      <span className="hidden sm:block">{file?.language ?? "Plain Text"}</span>
       <span className="hidden md:block">UTF-8</span>
 
-      {/* Social links - the footer's job, relocated to the status bar */}
-      <span className="flex items-center gap-3">
+      {/* Social links - the footer's job, relocated to the status bar.
+          ml-auto only below sm, where the readouts that normally push
+          right are hidden */}
+      <span className="ml-auto flex items-center gap-3 sm:ml-0">
         {socialLinks.map((link) => (
           <a
             key={link.label}
