@@ -1,18 +1,20 @@
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, useGLTF, useAnimations, AsciiRenderer } from "@react-three/drei";
+import { OrbitControls, useGLTF, useAnimations } from "@react-three/drei";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
 import * as THREE from "three";
+import { SafeAsciiRenderer } from "@/components/fx/SafeAsciiRenderer";
 
 /**
  * 3D avatar rendered as real-time ASCII art.
  *
- * The GLB model renders to a hidden WebGL canvas; drei's <AsciiRenderer>
- * converts each frame to a character grid overlaid on top. The overlay has
- * pointer-events: none and the underlying canvas stays interactive, so
- * click-to-animate and drag-to-rotate still work.
+ * The GLB model renders to a hidden WebGL canvas; SafeAsciiRenderer (our
+ * fixed fork of drei's AsciiRenderer) converts each frame to a character
+ * grid overlaid on top. The overlay has pointer-events: none and the
+ * underlying canvas stays interactive, so click-to-animate and
+ * drag-to-rotate still work.
  *
  * Click the avatar to cycle its animations.
  */
@@ -85,27 +87,27 @@ export function GLBAvatar() {
       >
         <Suspense fallback={null}>
           {/*
-           * ASCII output only needs luminance contrast, so lighting is
-           * simple: ambient base + key light + side fill. (The old HDR
-           * Environment preset was dropped - it cost a network fetch.)
+           * Opaque black background is required for correct ASCII shading:
+           * with invert=true, black maps to empty space and lit surfaces
+           * map to dense characters. (The hidden WebGL canvas never shows,
+           * so the black never appears on the page.)
            */}
-          <ambientLight intensity={0.9} />
-          <directionalLight position={[2, 3, 2]} intensity={1.2} />
-          <directionalLight position={[-2, 1, -1]} intensity={0.4} />
+          <color attach="background" args={["black"]} />
+
+          {/*
+           * Low ambient + strong angled key light maximizes the luminance
+           * gradient across the model - that gradient IS the ASCII detail.
+           */}
+          <ambientLight intensity={0.35} />
+          <directionalLight position={[2, 3, 3]} intensity={1.8} />
+          <directionalLight position={[-2, 1, -1]} intensity={0.3} />
 
           <Model onLoad={() => setLoaded(true)} />
 
-          {/*
-           * invert must be false: the transparent background reads as
-           * zero brightness, which must map to ' ' (empty), while the lit
-           * model maps to dense characters. Inverting turns the whole
-           * background into a wall of '#'.
-           */}
-          <AsciiRenderer
+          <SafeAsciiRenderer
             fgColor={fgColor}
-            bgColor="transparent"
             characters=" .:-+*=%@#"
-            invert={false}
+            invert
             resolution={0.22}
           />
         </Suspense>
