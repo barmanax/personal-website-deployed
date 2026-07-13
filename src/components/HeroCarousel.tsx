@@ -15,18 +15,28 @@ const GLBAvatar = dynamic(
   { ssr: false }
 );
 
+/* Canvas-based, so client-only as well (no three.js involved) */
+const AsciiPortrait = dynamic(
+  () => import("./fx/AsciiPortrait").then((m) => m.AsciiPortrait),
+  { ssr: false }
+);
+
 type Slide =
   | { type: "avatar"; src?: undefined; alt?: undefined }
-  | { type: "image"; src: string; alt: string };
+  | { type: "image"; src: string; alt: string }
+  | { type: "ascii"; src: string; alt: string };
 
-/** All possible slide definitions */
+/**
+ * All possible slide definitions. The ASCII portrait leads (it reveals the
+ * real photo on hover, so the raw copy of that photo isn't a slide).
+ */
 const ALL_SLIDES: Slide[] = [
+  { type: "ascii", src: "/profile-1.png", alt: "ASCII portrait of Aditya" },
   { type: "avatar" },
-  { type: "image", src: "/profile-1.png", alt: "Profile photo 1" },
-  { type: "image", src: "/profile-2.JPG", alt: "Profile photo 2" },
+  { type: "image", src: "/profile-2.JPG", alt: "Profile photo" },
 ];
 
-/** Image-only slides for mobile (no 3D avatar) */
+/** Slides for mobile - everything except the heavy 3D avatar */
 const MOBILE_SLIDES: Slide[] = ALL_SLIDES.filter((s) => s.type !== "avatar");
 
 /**
@@ -112,6 +122,11 @@ export function HeroCarousel() {
           >
             {currentSlideData.type === "avatar" ? (
               <GLBAvatar />
+            ) : currentSlideData.type === "ascii" ? (
+              <AsciiPortrait
+                src={currentSlideData.src}
+                alt={currentSlideData.alt}
+              />
             ) : (
               <Image
                 src={currentSlideData.src}
