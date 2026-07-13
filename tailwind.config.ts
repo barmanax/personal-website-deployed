@@ -11,6 +11,27 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        /*
+         * IDE palette — every value points at a CSS variable defined in
+         * globals.css, so light/dark themes swap without dark: variants.
+         */
+        ide: {
+          bg: "var(--ide-bg)",
+          "bg-alt": "var(--ide-bg-alt)",
+          "bg-hover": "var(--ide-bg-hover)",
+          border: "var(--ide-border)",
+          fg: "var(--ide-fg)",
+          "fg-muted": "var(--ide-fg-muted)",
+          accent: "var(--ide-accent)",
+        },
+        /* Syntax-highlight tokens for decorative code-styled text */
+        syn: {
+          keyword: "var(--syn-keyword)",
+          string: "var(--syn-string)",
+          func: "var(--syn-func)",
+          comment: "var(--syn-comment)",
+          number: "var(--syn-number)",
+        },
         /* Neutral surface palette — used for backgrounds and cards */
         surface: {
           DEFAULT: "#0a0a0a",
@@ -35,6 +56,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
     },
   },
