@@ -81,8 +81,8 @@ export function HeroCarousel() {
     <div className="relative w-full sm:max-w-lg mx-auto">
       {/* Main carousel container - gray background only for image slides */}
       <div
-        className={`relative aspect-[3/4] sm:aspect-auto sm:h-[500px] lg:h-[550px] overflow-hidden rounded-2xl ${
-          currentSlideData.type === "image" ? "bg-surface-100 dark:bg-surface-900" : ""
+        className={`relative aspect-[3/4] sm:aspect-auto sm:h-[500px] lg:h-[550px] overflow-hidden rounded-md border border-ide-border ${
+          currentSlideData.type === "image" ? "bg-ide-bg-alt" : ""
         }`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -119,8 +119,7 @@ export function HeroCarousel() {
         <motion.button
           onClick={prevSlide}
           className="absolute left-4 top-1/2 -translate-y-1/2 z-10
-                     bg-surface-50/80 dark:bg-surface-800/80 backdrop-blur-sm
-                     hover:bg-surface-100 dark:hover:bg-surface-700
+                     bg-ide-bg-alt/80 backdrop-blur-sm hover:bg-ide-bg-hover
                      rounded-full p-2 transition-colors"
           aria-label="Previous slide"
           initial={{ opacity: 0 }}
@@ -133,8 +132,7 @@ export function HeroCarousel() {
         <motion.button
           onClick={nextSlide}
           className="absolute right-4 top-1/2 -translate-y-1/2 z-10
-                     bg-surface-50/80 dark:bg-surface-800/80 backdrop-blur-sm
-                     hover:bg-surface-100 dark:hover:bg-surface-700
+                     bg-ide-bg-alt/80 backdrop-blur-sm hover:bg-ide-bg-hover
                      rounded-full p-2 transition-colors"
           aria-label="Next slide"
           initial={{ opacity: 0 }}
@@ -153,8 +151,8 @@ export function HeroCarousel() {
             onClick={() => goToSlide(index)}
             className={`h-2 rounded-full transition-all ${
               index === safeIndex
-                ? "w-8 bg-accent"
-                : "w-2 bg-surface-300 dark:bg-surface-700 hover:bg-surface-400 dark:hover:bg-surface-600"
+                ? "w-8 bg-ide-accent"
+                : "w-2 bg-ide-border hover:bg-ide-fg-muted"
             }`}
             aria-label={`Go to slide ${index + 1}`}
             aria-current={index === safeIndex}

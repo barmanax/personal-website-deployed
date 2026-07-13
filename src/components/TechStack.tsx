@@ -30,17 +30,17 @@ export function TechStack() {
   return (
     <div>
       {/* Tab bar */}
-      <div className="flex gap-1 mb-8 border-b border-surface-200 dark:border-surface-800">
+      <div className="flex gap-1 mb-8 overflow-x-auto border-b border-ide-border font-mono">
         {TABS.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={[
-              "px-4 py-2 text-sm font-medium transition-colors -mb-px",
+              "shrink-0 px-4 py-2 text-sm transition-colors -mb-px",
               activeTab === tab.id
                 // Active: accent underline that sits flush on the container border
-                ? "text-accent border-b-2 border-accent font-semibold"
-                : "text-surface-500 dark:text-surface-400 hover:text-surface-900 dark:hover:text-surface-100",
+                ? "text-ide-accent border-b-2 border-ide-accent font-semibold"
+                : "text-ide-fg-muted hover:text-ide-fg",
             ].join(" ")}
           >
             {tab.label}
@@ -54,10 +54,9 @@ export function TechStack() {
           {visible.map((tech) => {
             // Shared Tailwind classes for both linked and non-linked pills
             const pillClass =
-              "whitespace-nowrap rounded-full border border-surface-200 dark:border-surface-700 " +
-              "bg-surface-50 dark:bg-surface-900 px-4 py-2 text-sm font-medium " +
-              "text-surface-700 dark:text-surface-300 hover:border-accent/50 " +
-              "hover:text-accent transition-colors";
+              "whitespace-nowrap rounded border border-ide-border bg-ide-bg-alt " +
+              "px-3 py-1.5 font-mono text-sm text-ide-fg-muted " +
+              "hover:border-ide-accent/60 hover:text-ide-accent transition-colors";
 
             const motionProps = {
               key: tech.name,

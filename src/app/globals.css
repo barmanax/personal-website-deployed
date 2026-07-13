@@ -75,18 +75,23 @@
 }
 
 @layer components {
-  /* Reusable glass/blur card effect for navbar and cards */
-  .glass {
-    @apply bg-white/70 dark:bg-surface-950/70 backdrop-blur-xl border border-surface-200 dark:border-surface-800;
-  }
-
-  /* Section container with consistent spacing */
+  /* Section container - tighter than before since content sits in the editor pane */
   .section-container {
-    @apply mx-auto max-w-6xl px-6 py-20 sm:px-8;
+    @apply mx-auto max-w-4xl px-6 py-16 sm:px-8;
   }
 
-  /* Heading styles */
+  /* Monospace section heading; pair with .code-comment for the // prefix */
   .section-heading {
-    @apply text-3xl font-bold tracking-tight sm:text-4xl;
+    @apply font-mono text-2xl font-bold tracking-tight sm:text-3xl;
+  }
+
+  /* Comment-styled decorative text (e.g. the "//" before headings) */
+  .code-comment {
+    @apply font-mono text-syn-comment;
+  }
+
+  /* Small mono chip used for tech tags, coursework, dates */
+  .code-chip {
+    @apply rounded border border-ide-border bg-ide-bg-alt px-2 py-0.5 font-mono text-xs text-ide-fg-muted;
   }
 }

@@ -25,7 +25,7 @@ export const aboutText = React.createElement(
   "I'm a Computer Science and Statistics student at the University of Illinois Urbana-Champaign. I love building full-stack applications, exploring data-driven insights, and learning new concepts. When I'm not coding, you'll find me playing sports, listening to music, traveling the world, and rating food spots on ",
   React.createElement(
     "a",
-    { href: "https://beliapp.co/app/adityabarman", target: "_blank", rel: "noopener noreferrer", className: "text-accent hover:underline" },
+    { href: "https://beliapp.co/app/adityabarman", target: "_blank", rel: "noopener noreferrer", className: "text-ide-accent hover:underline" },
     "Beli"
   ),
   "."
