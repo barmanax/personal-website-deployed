@@ -51,7 +51,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
     <FadeIn delay={index * 0.1}>
       <div
-        className="group flex h-full flex-col overflow-hidden rounded-md border border-ide-border
+        className="glitch-card group flex h-full flex-col overflow-hidden rounded-md border border-ide-border
                    bg-ide-bg-alt/50 transition-all duration-300
                    hover:-translate-y-1 hover:border-ide-accent/60 hover:shadow-lg"
       >

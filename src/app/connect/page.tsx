@@ -46,7 +46,7 @@ export default function ConnectPage() {
 
       {/* connect.json code block */}
       <FadeIn>
-        <div className="mx-auto max-w-2xl overflow-hidden rounded-md border border-ide-border bg-ide-bg-alt/50 font-mono text-sm sm:text-base">
+        <div className="glitch-card mx-auto max-w-2xl overflow-hidden rounded-md border border-ide-border bg-ide-bg-alt/50 font-mono text-sm sm:text-base">
           {/* File header strip */}
           <div className="border-b border-ide-border bg-ide-bg-alt px-4 py-2 text-xs text-ide-fg-muted">
             connect.json
