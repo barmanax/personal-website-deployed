@@ -105,7 +105,7 @@ export const experience: ExperienceEntry[] = [
     endDate: "Present",
     // Public-safe framing only: no internal capacity figures or unreleased work
     bullets: [
-      "Building timer-executor, a standalone Java microservice that decouples gRPC callback execution from timer scheduling in Slack's platform-wide Timerserver — the system delivering millions of time-sensitive events per day (scheduled messages, reminders, workflow triggers).",
+      "Building TimerCaller, a standalone Java microservice that decouples gRPC callback execution from timer scheduling in Slack's platform-wide Timerserver — the system delivering millions of time-sensitive events per day (scheduled messages, reminders, workflow triggers).",
       "Authored the project RFC and engineering a zero-downtime migration using parallel AWS SQS queue consumers and a staged rollout, enabling independent horizontal autoscaling of the pipeline's most burst-sensitive stage.",
     ],
   },

@@ -73,11 +73,7 @@ export function GLBAvatar() {
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
 
-  /*
-   * ASCII characters take their color from the theme's foreground token.
-   * invert follows the theme too: light-on-dark needs the brightness-to-
-   * density mapping flipped relative to dark-on-light.
-   */
+  /* ASCII characters take their color from the theme's foreground token */
   const fgColor = isDark ? "#abb2bf" : "#1f2328";
 
   return (
@@ -99,12 +95,18 @@ export function GLBAvatar() {
 
           <Model onLoad={() => setLoaded(true)} />
 
+          {/*
+           * invert must be false: the transparent background reads as
+           * zero brightness, which must map to ' ' (empty), while the lit
+           * model maps to dense characters. Inverting turns the whole
+           * background into a wall of '#'.
+           */}
           <AsciiRenderer
             fgColor={fgColor}
             bgColor="transparent"
             characters=" .:-+*=%@#"
-            invert={isDark}
-            resolution={0.18}
+            invert={false}
+            resolution={0.22}
           />
         </Suspense>
 
