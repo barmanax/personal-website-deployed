@@ -11,9 +11,17 @@ import { ScrambleText } from "@/components/fx/ScrambleText";
  * Explorer-style file tree used as the site navigation.
  * Folders expand/collapse like a real editor; page files live under
  * portfolio/src. Rendered in the desktop sidebar rail and the mobile drawer.
+ * @param onOpenFile - reopens the file's tab (needed when its tab was closed
+ *   but the route is already active, so no navigation event fires)
  * @param onNavigate - called after a link is clicked (mobile drawer closes itself)
  */
-export function FileTree({ onNavigate }: { onNavigate?: () => void }) {
+export function FileTree({
+  onOpenFile,
+  onNavigate,
+}: {
+  onOpenFile?: (path: string) => void;
+  onNavigate?: () => void;
+}) {
   const pathname = usePathname();
   const [portfolioOpen, setPortfolioOpen] = useState(true);
   const [srcOpen, setSrcOpen] = useState(true);
@@ -68,7 +76,10 @@ export function FileTree({ onNavigate }: { onNavigate?: () => void }) {
                   <li key={f.path}>
                     <Link
                       href={f.path}
-                      onClick={onNavigate}
+                      onClick={() => {
+                        onOpenFile?.(f.path);
+                        onNavigate?.();
+                      }}
                       aria-current={active ? "page" : undefined}
                       className={`flex items-center gap-1.5 border-l-2 py-1 pl-10 pr-3 ${
                         active
