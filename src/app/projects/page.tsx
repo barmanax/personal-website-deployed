@@ -71,9 +71,14 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
         {/* Content */}
         <div className="p-6">
-          <h3 className="mb-2 text-lg font-semibold group-hover:text-accent transition-colors">
-            {project.title}
-          </h3>
+          <div className="mb-2 flex items-baseline justify-between gap-2">
+            <h3 className="text-lg font-semibold group-hover:text-accent transition-colors">
+              {project.title}
+            </h3>
+            <span className="shrink-0 text-xs text-surface-500 dark:text-surface-500">
+              {project.date}
+            </span>
+          </div>
           <p className="mb-4 text-sm text-surface-600 dark:text-surface-400 leading-relaxed">
             {project.description}
           </p>
