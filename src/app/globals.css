@@ -2,21 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * IDE theme tokens.
+ * Both palettes are defined as CSS variables so a single class swap on <html>
+ * (handled by next-themes) re-themes everything, including canvas/WebGL code
+ * that reads these values at runtime via getComputedStyle.
+ *
+ * Light = GitHub Light-inspired. Dark = One Dark-inspired.
+ */
 @layer base {
+  :root {
+    /* Chrome + editor surfaces */
+    --ide-bg: #ffffff;          /* editor pane background */
+    --ide-bg-alt: #f6f8fa;      /* sidebar, tab strip, status bar */
+    --ide-bg-hover: #eaeef2;    /* hover states on chrome elements */
+    --ide-border: #d1d9e0;
+    --ide-fg: #1f2328;          /* primary text */
+    --ide-fg-muted: #59636e;    /* secondary text */
+    --ide-accent: #0969da;      /* links, active indicators */
+
+    /* Syntax-highlight tokens - used for decorative code-styled text */
+    --syn-keyword: #cf222e;
+    --syn-string: #0a3069;
+    --syn-func: #8250df;
+    --syn-comment: #6e7781;
+    --syn-number: #0550ae;
+  }
+
+  .dark {
+    --ide-bg: #282c34;
+    --ide-bg-alt: #21252b;
+    --ide-bg-hover: #2c313a;
+    --ide-border: #181a1f;
+    --ide-fg: #abb2bf;
+    --ide-fg-muted: #5c6370;
+    --ide-accent: #61afef;
+
+    --syn-keyword: #c678dd;
+    --syn-string: #98c379;
+    --syn-func: #61afef;
+    --syn-comment: #5c6370;
+    --syn-number: #d19a66;
+  }
+
   /* Smooth theme transitions across all elements */
   * {
     @apply transition-colors duration-200;
   }
 
   body {
-    @apply bg-white text-surface-900 dark:bg-surface-950 dark:text-surface-100;
+    @apply bg-ide-bg text-ide-fg;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-    cursor: crosshair;
   }
 
-  /* Custom scrollbar for dark theme */
+  /* Slim IDE-style scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
+    height: 8px;
   }
 
   ::-webkit-scrollbar-track {
@@ -24,11 +66,11 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-surface-300 dark:bg-surface-700 rounded-full;
+    @apply bg-ide-border rounded-full;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-surface-400 dark:bg-surface-600;
+    @apply bg-ide-fg-muted;
   }
 }
 
