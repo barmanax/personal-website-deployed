@@ -1,10 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { TitleBar } from "./TitleBar";
 import { FileTree } from "./FileTree";
 import { TabBar } from "./TabBar";
 import { StatusBar } from "./StatusBar";
+
+/* Ambient background simulation - client-only, no SSR value */
+const GameOfLife = dynamic(
+  () => import("@/components/fx/GameOfLife").then((m) => m.GameOfLife),
+  { ssr: false }
+);
 
 /** localStorage key for the desktop sidebar preference */
 const SIDEBAR_KEY = "ide-sidebar-open";
@@ -67,10 +74,11 @@ export function IDEShell({ children }: { children: React.ReactNode }) {
           </>
         )}
 
-        {/* Editor column */}
-        <div className="flex min-w-0 flex-1 flex-col">
+        {/* Editor column - relative so the ambient canvas can sit behind the pane */}
+        <div className="relative flex min-w-0 flex-1 flex-col">
+          <GameOfLife />
           <TabBar />
-          <main id="editor-pane" className="relative flex-1 overflow-y-auto">
+          <main id="editor-pane" className="relative z-10 flex-1 overflow-y-auto">
             {children}
           </main>
         </div>
