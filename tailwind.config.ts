@@ -1,5 +1,13 @@
 import type { Config } from "tailwindcss";
 
+/**
+ * Wraps a CSS variable holding an "R G B" channel triplet so Tailwind can
+ * inject opacity modifiers into it.
+ * @param variable - CSS custom property name, e.g. "--ide-bg"
+ * @returns A colour value Tailwind resolves to `rgb(R G B / <opacity>)`
+ */
+const withAlpha = (variable: string) => `rgb(var(${variable}) / <alpha-value>)`;
+
 const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -14,23 +22,29 @@ const config: Config = {
         /*
          * IDE palette — every value points at a CSS variable defined in
          * globals.css, so light/dark themes swap without dark: variants.
+         *
+         * The `rgb(var(--x) / <alpha-value>)` wrapper is required, not
+         * cosmetic: Tailwind substitutes <alpha-value> with the opacity
+         * modifier, which is what makes `bg-ide-bg-alt/50` compile. A bare
+         * `var(--x)` holding a hex silently drops any modified utility.
+         * This is why globals.css stores channel triplets rather than hex.
          */
         ide: {
-          bg: "var(--ide-bg)",
-          "bg-alt": "var(--ide-bg-alt)",
-          "bg-hover": "var(--ide-bg-hover)",
-          border: "var(--ide-border)",
-          fg: "var(--ide-fg)",
-          "fg-muted": "var(--ide-fg-muted)",
-          accent: "var(--ide-accent)",
+          bg: withAlpha("--ide-bg"),
+          "bg-alt": withAlpha("--ide-bg-alt"),
+          "bg-hover": withAlpha("--ide-bg-hover"),
+          border: withAlpha("--ide-border"),
+          fg: withAlpha("--ide-fg"),
+          "fg-muted": withAlpha("--ide-fg-muted"),
+          accent: withAlpha("--ide-accent"),
         },
         /* Syntax-highlight tokens for decorative code-styled text */
         syn: {
-          keyword: "var(--syn-keyword)",
-          string: "var(--syn-string)",
-          func: "var(--syn-func)",
-          comment: "var(--syn-comment)",
-          number: "var(--syn-number)",
+          keyword: withAlpha("--syn-keyword"),
+          string: withAlpha("--syn-string"),
+          func: withAlpha("--syn-func"),
+          comment: withAlpha("--syn-comment"),
+          number: withAlpha("--syn-number"),
         },
       },
       fontFamily: {

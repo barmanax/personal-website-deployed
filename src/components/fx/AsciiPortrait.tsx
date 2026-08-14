@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import { themeColor } from "@/lib/theme";
 
 /**
  * A photo rendered as live ASCII art on a canvas.
@@ -77,8 +78,7 @@ export function AsciiPortrait({ src, alt }: { src: string; alt: string }) {
       }
       const range = Math.max(max - min, 0.001);
 
-      const styles = getComputedStyle(document.documentElement);
-      const ink = styles.getPropertyValue("--ide-fg").trim();
+      const ink = themeColor("--ide-fg");
       const isDark = document.documentElement.classList.contains("dark");
 
       ctx.clearRect(0, 0, width, height);
