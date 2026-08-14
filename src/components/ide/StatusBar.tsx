@@ -3,15 +3,15 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Check, GitBranch, Github, Linkedin, Mail } from "lucide-react";
-import { fileForPath } from "./ide.config";
+import { fileForPath, LINE_HEIGHT_PX } from "./ide.config";
 import { siteConfig } from "@/data/content";
-
-/** Approximate text line height the fake Ln readout is denominated in */
-const LINE_HEIGHT_PX = 24;
 
 /**
  * Derives an honest-but-playful "Ln" readout from the editor pane's scroll
  * position - scrolling the page moves the cursor line, like a real editor.
+ *
+ * Shares LINE_HEIGHT_PX with the gutter, so this number now matches the line
+ * number actually rendered at the top of the pane rather than approximating it.
  */
 function useEditorLine(): number {
   const [line, setLine] = useState(1);
