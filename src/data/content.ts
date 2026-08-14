@@ -87,15 +87,33 @@ export interface ExperienceEntry {
 
 export const experience: ExperienceEntry[] = [
   {
-    title: "Software Engineer Intern, Real-Time Services",
+    title: "Software Development Engineer Intern",
+    organization: "Amazon Web Services (AWS)",
+    location: "East Palo Alto, CA",
+    startDate: "Sep 2026",
+    endDate: "Dec 2026",
+    bullets: [
+      "Incoming Fall intern on the AWS Redshift Database team, Amazon's petabyte-scale cloud data warehouse.",
+    ],
+  },
+  {
+    title: "Software Engineer Intern, Real-Time Services & Backend Infrastructure",
     organization: "Slack (Salesforce)",
     location: "San Francisco, CA",
     startDate: "May 2026",
-    endDate: "Present",
-    // Public-safe framing only: no internal capacity figures or unreleased work
+    endDate: "Aug 2026",
+    /*
+     * Public-safe framing only. The resume version of these bullets carries
+     * per-day delivery volumes, user and organization counts, pod counts,
+     * infrastructure cost percentages, and the specific product launch the
+     * capacity work supported - all deliberately omitted here. What remains
+     * is the architecture and the engineering approach, which stand on their
+     * own without disclosing internal scale or unreleased work.
+     */
     bullets: [
-      "Building TimerCaller, a standalone Java microservice that decouples gRPC callback execution from timer scheduling in Slack's platform-wide Timerserver — the system delivering millions of time-sensitive events per day (scheduled messages, reminders, workflow triggers).",
-      "Authored the project RFC and engineering a zero-downtime migration using parallel AWS SQS queue consumers and a staged rollout, enabling independent horizontal autoscaling of the pipeline's most burst-sensitive stage.",
+      "Built TimerCaller, a production Java microservice that decouples gRPC callback execution from timer scheduling in Slack's platform-wide Timerserver — the system delivering millions of time-sensitive events per day (scheduled messages, reminders, workflow triggers).",
+      "Authored the project RFC and engineered a zero-downtime migration using parallel AWS SQS queue consumers and a staged rollout, enabling independent horizontal autoscaling of the pipeline's most burst-sensitive stage.",
+      "Sized Kubernetes autoscaling capacity to absorb peak traffic bursts, then cut production traffic over in three staged batches with no downtime, rollout regressions, or dropped callbacks.",
     ],
   },
   {
