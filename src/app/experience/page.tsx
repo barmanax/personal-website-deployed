@@ -67,7 +67,7 @@ function TimelineEntry({
         <div className="mb-2 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
           <h3 className="text-lg font-semibold text-ide-fg">{entry.title}</h3>
           <span className="code-chip shrink-0">
-            {entry.startDate} — {entry.endDate}
+            {entry.startDate} - {entry.endDate}
           </span>
         </div>
         <p className="mb-3 text-sm font-medium text-ide-accent">

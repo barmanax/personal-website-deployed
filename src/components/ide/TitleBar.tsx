@@ -44,7 +44,7 @@ export function TitleBar({
 
       {/* Centered workspace title */}
       <p className="pointer-events-none absolute left-1/2 hidden -translate-x-1/2 text-ide-fg-muted sm:block">
-        {siteConfig.name.toLowerCase().replace(" ", "-")} — portfolio
+        {siteConfig.name.toLowerCase().replace(" ", "-")} - portfolio
       </p>
 
       <div className="ml-auto">
