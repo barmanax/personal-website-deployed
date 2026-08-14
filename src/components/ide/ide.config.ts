@@ -25,6 +25,16 @@ export const ideFiles: IDEFile[] = [
   { path: "/connect", file: "connect.json", language: "JSON", icon: FileJson2, iconClass: "text-syn-number" },
 ];
 
+/**
+ * Notional text line height, in px, that the editor chrome is denominated in.
+ *
+ * Shared so the three things that count "lines" agree with each other: the
+ * gutter renders one number per LINE_HEIGHT_PX of content, the minimap splits
+ * blocks into that many stripes, and the status bar derives its "Ln" readout
+ * from the same value. It matches Tailwind's `leading-6` on body copy.
+ */
+export const LINE_HEIGHT_PX = 24;
+
 /** Look up the file entry for the current route (undefined on unknown routes) */
 export function fileForPath(pathname: string): IDEFile | undefined {
   return ideFiles.find((f) => f.path === pathname);

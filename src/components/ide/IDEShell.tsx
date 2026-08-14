@@ -8,13 +8,15 @@ import { FileTree } from "./FileTree";
 import { TabBar } from "./TabBar";
 import { StatusBar } from "./StatusBar";
 import { WelcomeScreen } from "./WelcomeScreen";
+import { EditorGutter } from "./EditorGutter";
 import { ideFiles, fileForPath } from "./ide.config";
 
-/* Ambient background simulation - client-only, no SSR value */
-const GameOfLife = dynamic(
-  () => import("@/components/fx/GameOfLife").then((m) => m.GameOfLife),
-  { ssr: false }
-);
+/* Entirely derived from measured DOM geometry, so there is nothing to render
+   on the server. The gutter stays a static import - it SSRs as an empty rail
+   and fills in on measure, so it costs nothing and avoids a second chunk. */
+const Minimap = dynamic(() => import("./Minimap").then((m) => m.Minimap), {
+  ssr: false,
+});
 
 /** localStorage key for the desktop sidebar preference */
 const SIDEBAR_KEY = "ide-sidebar-open";
@@ -118,17 +120,35 @@ export function IDEShell({ children }: { children: React.ReactNode }) {
           </>
         )}
 
-        {/* Editor column - relative so the ambient canvas can sit behind the pane */}
-        <div className="relative flex min-w-0 flex-1 flex-col">
-          <GameOfLife />
+        {/* Editor column: tab strip on top, then the pane and its minimap */}
+        <div className="flex min-w-0 flex-1 flex-col">
           <TabBar openTabs={openTabs} onClose={closeTab} />
-          <main id="editor-pane" className="relative z-10 flex-1 overflow-y-auto">
-            {openTabs.length === 0 ? (
-              <WelcomeScreen onOpenFile={openTab} />
-            ) : (
-              children
-            )}
-          </main>
+
+          <div className="flex min-h-0 flex-1">
+            {/* pl-14 reserves the gutter rail so line numbers never overlap text */}
+            <main
+              id="editor-pane"
+              className="relative min-w-0 flex-1 overflow-y-auto lg:pl-14"
+            >
+              {/*
+               * Positioned wrapper sized to the *content*, not the viewport.
+               * An absolutely-positioned child of a scroll container resolves
+               * inset-0 against the visible box, so the gutter would stop at
+               * the fold without this element to anchor against. It also gives
+               * the minimap a stable node to measure and observe.
+               */}
+              <div id="editor-content" className="relative min-h-full">
+                <EditorGutter />
+                {openTabs.length === 0 ? (
+                  <WelcomeScreen onOpenFile={openTab} />
+                ) : (
+                  children
+                )}
+              </div>
+            </main>
+
+            <Minimap />
+          </div>
         </div>
       </div>
 
