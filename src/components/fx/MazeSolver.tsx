@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
+import { themeColor } from "@/lib/theme";
 
 /**
  * Animated maze generator + solver for the 404 page.
@@ -133,14 +134,11 @@ export function MazeSolver() {
     let rafId = 0;
     let restartTimer: ReturnType<typeof setTimeout>;
 
-    const colors = () => {
-      const s = getComputedStyle(document.documentElement);
-      return {
-        wall: s.getPropertyValue("--ide-border").trim(),
-        frontier: s.getPropertyValue("--syn-keyword").trim(),
-        path: s.getPropertyValue("--ide-accent").trim(),
-      };
-    };
+    const colors = () => ({
+      wall: themeColor("--ide-border"),
+      frontier: themeColor("--syn-keyword"),
+      path: themeColor("--ide-accent"),
+    });
 
     const run = () => {
       cancelAnimationFrame(rafId);

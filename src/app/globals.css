@@ -5,44 +5,60 @@
 /*
  * IDE theme tokens.
  * Both palettes are defined as CSS variables so a single class swap on <html>
- * (handled by next-themes) re-themes everything, including canvas/WebGL code
+ * (handled by next-themes) re-themes everything, including canvas code
  * that reads these values at runtime via getComputedStyle.
+ *
+ * Values are stored as bare "R G B" channel triplets, NOT hex. That is what
+ * lets tailwind.config.ts wrap them as `rgb(var(--token) / <alpha-value>)`,
+ * which in turn makes opacity modifiers like `bg-ide-bg-alt/50` work.
+ * With a hex in the var, Tailwind v3 cannot compute the alpha channel and
+ * silently emits no declaration at all - the utility looks applied in the
+ * markup but has zero effect. Read them from JS via lib/theme.ts.
  *
  * Light = GitHub Light-inspired. Dark = One Dark-inspired.
  */
 @layer base {
   :root {
     /* Chrome + editor surfaces */
-    --ide-bg: #ffffff;          /* editor pane background */
-    --ide-bg-alt: #f6f8fa;      /* sidebar, tab strip, status bar */
-    --ide-bg-hover: #eaeef2;    /* hover states on chrome elements */
-    --ide-border: #d1d9e0;
-    --ide-fg: #1f2328;          /* primary text */
-    --ide-fg-muted: #59636e;    /* secondary text */
-    --ide-accent: #0969da;      /* links, active indicators */
+    --ide-bg: 255 255 255;      /* #ffffff - editor pane background */
+    --ide-bg-alt: 246 248 250;  /* #f6f8fa - sidebar, tab strip, status bar */
+    --ide-bg-hover: 234 238 242;/* #eaeef2 - hover states on chrome elements */
+    --ide-border: 209 217 224;  /* #d1d9e0 */
+    --ide-fg: 31 35 40;         /* #1f2328 - primary text */
+    --ide-fg-muted: 89 99 110;  /* #59636e - secondary text, 6.1:1 on --ide-bg */
+    --ide-accent: 9 105 218;    /* #0969da - links, active indicators */
 
     /* Syntax-highlight tokens - used for decorative code-styled text */
-    --syn-keyword: #cf222e;
-    --syn-string: #0a3069;
-    --syn-func: #8250df;
-    --syn-comment: #6e7781;
-    --syn-number: #0550ae;
+    --syn-keyword: 207 34 46;   /* #cf222e */
+    --syn-string: 10 48 105;    /* #0a3069 */
+    --syn-func: 130 80 223;     /* #8250df */
+    --syn-comment: 110 119 129; /* #6e7781 */
+    --syn-number: 5 80 174;     /* #0550ae */
   }
 
   .dark {
-    --ide-bg: #282c34;
-    --ide-bg-alt: #21252b;
-    --ide-bg-hover: #2c313a;
-    --ide-border: #181a1f;
-    --ide-fg: #abb2bf;
-    --ide-fg-muted: #5c6370;
-    --ide-accent: #61afef;
+    --ide-bg: 40 44 52;         /* #282c34 */
+    --ide-bg-alt: 33 37 43;     /* #21252b */
+    --ide-bg-hover: 44 49 58;   /* #2c313a */
+    --ide-border: 24 26 31;     /* #181a1f */
+    --ide-fg: 171 178 191;      /* #abb2bf - 6.9:1 on --ide-bg */
 
-    --syn-keyword: #c678dd;
-    --syn-string: #98c379;
-    --syn-func: #61afef;
-    --syn-comment: #5c6370;
-    --syn-number: #d19a66;
+    /*
+     * #939bab. Deliberately NOT One Dark's comment grey (#5c6370, kept below
+     * as --syn-comment): that colour is designed to recede behind code and
+     * only reaches 2.3:1 here, well under the 4.5:1 WCAG AA floor for body
+     * text. This token carries every bullet, date chip, and caption on the
+     * site, so it needs to read as text. 5.0:1 on --ide-bg, 5.5:1 on
+     * --ide-bg-alt, while staying a clear step below --ide-fg for hierarchy.
+     */
+    --ide-fg-muted: 147 155 171;
+    --ide-accent: 97 175 239;   /* #61afef */
+
+    --syn-keyword: 198 120 221; /* #c678dd */
+    --syn-string: 152 195 121;  /* #98c379 */
+    --syn-func: 97 175 239;     /* #61afef */
+    --syn-comment: 92 99 112;   /* #5c6370 - receding by design; decorative only */
+    --syn-number: 209 154 102;  /* #d19a66 */
   }
 
   /* Smooth theme transitions across all elements */
