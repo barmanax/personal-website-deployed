@@ -103,17 +103,15 @@ export const experience: ExperienceEntry[] = [
     startDate: "May 2026",
     endDate: "Aug 2026",
     /*
-     * Public-safe framing only. The resume version of these bullets carries
-     * per-day delivery volumes, user and organization counts, pod counts,
-     * infrastructure cost percentages, and the specific product launch the
-     * capacity work supported - all deliberately omitted here. What remains
-     * is the architecture and the engineering approach, which stand on their
-     * own without disclosing internal scale or unreleased work.
+     * Scoped to the TimerCaller project only. The capacity-planning work from
+     * the resume is deliberately absent rather than reworded - it supported an
+     * unreleased product launch, so no framing of it belongs on a public page.
+     * The resume's internal figures (delivery volumes, user and organization
+     * counts, pod counts, cost and database-load percentages) are omitted too.
      */
     bullets: [
       "Built TimerCaller, a production Java microservice that decouples gRPC callback execution from timer scheduling in Slack's platform-wide Timerserver — the system delivering millions of time-sensitive events per day (scheduled messages, reminders, workflow triggers).",
       "Authored the project RFC and engineered a zero-downtime migration using parallel AWS SQS queue consumers and a staged rollout, enabling independent horizontal autoscaling of the pipeline's most burst-sensitive stage.",
-      "Sized Kubernetes autoscaling capacity to absorb peak traffic bursts, then cut production traffic over in three staged batches with no downtime, rollout regressions, or dropped callbacks.",
     ],
   },
   {
