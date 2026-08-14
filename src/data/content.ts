@@ -103,15 +103,14 @@ export const experience: ExperienceEntry[] = [
     startDate: "May 2026",
     endDate: "Aug 2026",
     /*
-     * Scoped to the TimerCaller project only. The capacity-planning work from
-     * the resume is deliberately absent rather than reworded - it supported an
-     * unreleased product launch, so no framing of it belongs on a public page.
-     * The resume's internal figures (delivery volumes, user and organization
-     * counts, pod counts, cost and database-load percentages) are omitted too.
+     * Scoped to the TimerCaller project. Impact metrics are intentionally
+     * included here (user decision 2026-08-14). The only Slack exclusion that
+     * still applies is the capacity-planning work for the unreleased product
+     * launch, which is omitted entirely rather than reworded.
      */
     bullets: [
-      "Built TimerCaller, a production Java microservice that decouples gRPC callback execution from timer scheduling in Slack's platform-wide Timerserver — the system delivering millions of time-sensitive events per day (scheduled messages, reminders, workflow triggers).",
-      "Authored the project RFC and engineered a zero-downtime migration using parallel AWS SQS queue consumers and a staged rollout, enabling independent horizontal autoscaling of the pipeline's most burst-sensitive stage.",
+      "Built TimerCaller, a production Java microservice that splits delivery out of Slack's platform-wide scheduler, handling 160M+ scheduled reminders and messages per day for 47M+ users while cutting database load 49%.",
+      "Migrated production traffic in three staged batches with zero downtime, shrinking the fleet from 38 to 19 pods and cutting annual infrastructure cost 40% with no rollout regressions or dropped callbacks.",
     ],
   },
   {
@@ -138,7 +137,7 @@ export const experience: ExperienceEntry[] = [
     ],
   },
   {
-    title: "Software Development Intern — AI4Defense Program",
+    title: "Software Development Intern, AI4Defense Program",
     organization: "Chief Digital & AI Office (CDAO), Dept. of Defense",
     location: "Washington, D.C.",
     startDate: "Jun 2024",
