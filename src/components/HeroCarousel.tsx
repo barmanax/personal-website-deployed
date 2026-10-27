@@ -16,9 +16,9 @@ const AsciiPortrait = dynamic(
  * original. Same treatment everywhere keeps the hero visually coherent.
  */
 const SLIDES = [
-  { src: "/profile-1.png", alt: "ASCII portrait of Aditya (headshot)" },
-  { src: "/unnamed-compressed.jpg", alt: "ASCII portrait of Aditya in New York" },
   { src: "/profile-2.JPG", alt: "ASCII portrait of Aditya in Chicago" },
+  { src: "/unnamed-compressed.jpg", alt: "ASCII portrait of Aditya in New York" },
+  { src: "/profile-1.png", alt: "ASCII portrait of Aditya (headshot)" },
 ];
 
 /** Hero carousel - rotates between ASCII-rendered portraits */
