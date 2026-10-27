@@ -11,7 +11,7 @@ export const siteConfig = {
   name: "Aditya Barman",
   tagline: "CS + Statistics @ UIUC",
   description:
-    "Building things at the intersection of software engineering and data. Passionate about creating elegant solutions to complex problems.",
+    "Building reliable, data-intensive systems, from distributed backends to AI-powered products. Passionate about creating elegant solutions to complex problems.",
   email: "a02barman@gmail.com",
   github: "https://github.com/barmanax",
   linkedin: "https://www.linkedin.com/in/adityabarman/",
