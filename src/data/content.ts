@@ -18,7 +18,7 @@ export const siteConfig = {
 };
 
 export const aboutText =
-  "I'm a Computer Science and Statistics student at the University of Illinois Urbana-Champaign. I love building full-stack applications, exploring data-driven insights, and learning new concepts. When I'm not coding, you'll find me playing sports, listening to music, traveling the world, and rating food spots on Beli.";
+  "I'm a Computer Science and Statistics student at the University of Illinois Urbana-Champaign. I'm drawn to complex, data-intensive systems: backend services, distributed infrastructure, and the cloud platforms that keep them reliable at scale. I also love building AI-powered products and full-stack apps, and I'm always looking to own hard problems end to end. When I'm not coding, you'll find me playing sports, listening to music, traveling the world, and rating food spots on Beli.";
 
 /** The three role-based filter tabs shown in the tech stack section */
 export type TechCategory = "fullstack" | "backend" | "data";
